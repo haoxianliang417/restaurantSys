@@ -4,7 +4,6 @@ var path = require('path');
 exports.main = function(express) {
 
 var app = express();
-
 app.use(express.static(path.join(path.resolve(__dirname, '../../'), '/')), function(req, res, next) {
 
     // Website you wish to allow to connect
@@ -25,8 +24,24 @@ app.use(express.static(path.join(path.resolve(__dirname, '../../'), '/')), funct
 });
 
 
-app.get('/hehe/haha', function(request, response) {
-    response.send('Home Page');
+
+app.get('/', function(request, response) {
+    response.status(200).send('Home Page');
 })
-app.listen(8888);
+var server =require('http').createServer(app);
+var io = require('socket.io')(server);
+//socket
+io.on('connection',function(socket){
+    console.log('ok');
+    //console.log(this);
+    socket.emit('login','hehe');
+    socket.on('click',function(aaa){
+    console.log('click')
+    })
+})
+
+
+
+
+server.listen(8888);
 }
