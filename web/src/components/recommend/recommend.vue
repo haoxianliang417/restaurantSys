@@ -19,22 +19,34 @@
 	    </el-card>
 	  </el-col>
 	</el-row>
-  <paging></paging>
+  <div class="block">
+      <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page.sync="curpage"
+      :page-size="pageSize"
+      layout="total, prev, pager, next"
+      :total="totalAct">
+    </el-pagination>
+  </div>
 
   </div>
 </template>
 
 <script>
-import paging from '../paging/paging.vue'
 import axios from 'axios'
-let baseUrl = 'http://localhost:8888'
+import qs from 'qs'
+let baseUrl = 'http://localhost:8888/'
 	export default{
 		data (){
 			return{
 				currentDate: new Date(),
         num:'',
         show:false,
-        data:[]
+        data:[],
+        curpage: 1,
+        pageSize:8,
+        totalAct:20
 			}
 		},
 		methods:{
@@ -53,21 +65,36 @@ let baseUrl = 'http://localhost:8888'
           this.num = ''
         }
       },
-		},
-    components:{
-      paging
-    },
-    beforeMount(){
-        axios.get(baseUrl + '/goodsData')
+      handleSizeChange(val) {
+        this.pageSize = val;
+        this.ajaxData(this.curpage, this.pageSize)
+      },
+      handleCurrentChange(val) {
+        this.curpage = val;
+        console.log(val)
+        this.ajaxData(this.curpage, this.pageSize)
+      },
+      ajaxData(start, num){
+        var startN = (start-1)*num;
+        console.log(startN,num)
+        var postData = {startNum: startN, num: num}
+        console.log('axios',axios)
+        axios.post(baseUrl + 'paging', qs.stringify(postData) )
         .then(res=>{
           console.log(res)
-          var arr = res.data.goodsData
+          var arr = res.data.data
           arr.forEach((item, idx)=>{
             item.img = item.img.replace(/^\[/,'').replace(/\]$/,'').split(',')
           })
-          this.data = arr.slice(0,8);
+          this.totalAct = res.data.account;
+          this.data = arr;
         })
+      
       }
+		},
+    created(){
+      this.ajaxData(this.curpage, this.pageSize)
+    }
 	}
 </script>
 
@@ -94,4 +121,5 @@ let baseUrl = 'http://localhost:8888'
   .price{float:left;font-size:0.15rem;margin-left:0.075rem;line-height:0.226rem}
   .price:before{content:'￥'}
   .price:after{content:'.00'}
+  .block{margin:0.15rem 0}
 </style>

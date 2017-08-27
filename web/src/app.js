@@ -3,9 +3,10 @@ import Vue from 'vue';
 import store from './vuex/store'
 import router from './router/'
 import App from './App.vue'
+import axios from 'axios'
 
 Vue.use(ElementUI)
-
+Vue.prototype.$ajax = axios
 var designWidth = 768, rem2px = 100;
 document.documentElement.style.fontSize =
   ((window.innerWidth / designWidth) * rem2px) + 'px';

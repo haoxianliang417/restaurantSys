@@ -8,11 +8,11 @@
     <el-tab-pane label="面点" name="five">面点</el-tab-pane>
     <el-tab-pane label="果盘" name="six">果盘</el-tab-pane>
   </el-tabs>
-  <paging></paging>
+  
   </div>
 </template>
 <script>
-import paging from '../paging/paging.vue'
+
   export default {
     data() {
       return {
@@ -25,7 +25,7 @@ import paging from '../paging/paging.vue'
       }
     },
     components: {
-      paging
+      
     }
   };
 </script>
