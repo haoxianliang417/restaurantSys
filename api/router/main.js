@@ -1,6 +1,6 @@
 
 var path = require('path');
-
+var goodsData = require('./goodsData')
 exports.main = function(express) {
 
 var app = express();
@@ -24,8 +24,8 @@ app.use(express.static(path.join(path.resolve(__dirname, '../../'), '/')), funct
     next();
 });
 
-
-app.get('/hehe/haha', function(request, response) {
+goodsData.goodsData(app)
+app.get('/', function(request, response) {
     response.send('Home Page');
 })
 app.listen(8888);

@@ -17,7 +17,6 @@ module.exports = {
     //查询:SELECT data FROM table
     query: function(callback) {
         connection.query("SELECT * FROM menu", function(err, result) {
-
             if (err) {
                 console.log(err)
             } else {
