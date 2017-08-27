@@ -7,6 +7,7 @@
     <el-input placeholder="请输入内容" class="search-btn">
       <el-button slot="append" icon="search"></el-button>
     </el-input>
+    <el-button class="billStatus" @click="steps">当前账单状态</el-button>
 </el-row>
 </template>
 
@@ -31,11 +32,14 @@
 			},
 			classify(){
 				this.$store.dispatch('classify');
+			},
+			steps(){
+				this.$store.dispatch('steps');
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
-	
+	.billStatus{margin-left:0.15rem}
 </style>

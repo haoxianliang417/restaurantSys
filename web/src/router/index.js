@@ -5,6 +5,7 @@ import HomeComponent from '../components/home/home.vue'
 import dailyspecialCom from '../components/dailySpecial/dailyspecial.vue'
 import recommendCom from '../components/recommend/recommend.vue'
 import classifyCom from '../components/classify/classify.vue'
+import stepsCom from '../components/steps/steps.vue'
 
 Vue.use(VueRouter)
 
@@ -28,7 +29,12 @@ const router = new VueRouter({
 		path:'/classify',
 		name:'classify',
 		component:classifyCom
-	}
+	},
+	{
+		path:'/steps',
+		name:'steps',
+		component:stepsCom
+	},
 	]
 })
 

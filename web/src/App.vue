@@ -1,20 +1,20 @@
 <template>
     <div id="app">
-        <el-row :gutter="10" class="height">
-          <el-col :xs="4" :sm="4" :md="4" :lg="4" >
-            <div class="grid-content bg-purple">
-              <leftnav></leftnav>
-             </div>
-          </el-col>
-          <el-col :xs="20" :sm="20" :md="20" :lg="20" class="appright">
-            <div class="grid-content bg-purple-light">
-              <apphead></apphead>
-              <el-row :gutter="10">
-                <router-view class="mainGood"></router-view>
-              </el-row>
-            </div>
-          </el-col>
-        </el-row>
+      <el-row :gutter="10" class="height">
+        <el-col :xs="4" :sm="4" :md="4" :lg="4" >
+          <div class="grid-content bg-purple">
+            <leftnav></leftnav>
+           </div>
+        </el-col>
+        <el-col :xs="20" :sm="20" :md="20" :lg="20" class="appright">
+          <div class="grid-content bg-purple-light">
+            <apphead></apphead>
+            <el-row :gutter="10">
+              <router-view class="mainGood"></router-view>
+            </el-row>
+          </div>
+        </el-col>
+      </el-row>
     
   </div>
 </template>
@@ -46,5 +46,5 @@
   .btn{display:flex;
     .search-btn{width:30%;margin-left:0.15rem}
   }
-  .mainGood{margin:0.15rem 0;padding-right:0.226rem;}
+  .mainGood{padding-right:0.226rem;}
 </style>

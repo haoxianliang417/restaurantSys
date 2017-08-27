@@ -13,6 +13,9 @@ const mutations = {
 	},
 	classify: () => {
 		router.push({name: 'classify'})
+	},
+	steps: () => {
+		router.push({name: 'steps'})
 	}
 
 }
@@ -26,6 +29,9 @@ const actions = {
 	},
 	classify: (events) => {
 		events.commit('classify')
+	},
+	steps: (events) => {
+		events.commit('steps')
 	}
 }
 
