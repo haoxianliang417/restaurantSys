@@ -1,0 +1,13 @@
+@import url('../food/common.scss');
+.main{
+	width: 100%;
+	overflow: hidden;
+
+	.total{
+		font-size: 0.12rem;
+		color:#8E8E8E;
+		height:0.3rem;
+		border-bottom: 0.01rem solid #ddd;
+		line-height: 0.3rem;
+	}
+}

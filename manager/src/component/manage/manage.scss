@@ -1,0 +1,71 @@
+body,ul,li,input{
+	margin:0 ;
+	padding:0;
+}
+ul{
+	li{
+		list-style:none;
+	}
+}
+.fr{
+	float:right;
+}
+.fl{
+	float:left;
+}
+.over{
+	overflow: hidden;
+}
+img{
+	display:block;
+}
+
+body{
+	width: 100%;
+
+}
+#manage_index .header{
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+	padding:0 20px;
+	height:54px;
+	line-height:54px;
+	background:#EAEEF1;
+	border-bottom:1px solid #ccc;
+	border-top:1px solid #ccc;
+}
+#manage_index {
+	.header {
+		.el-icon-arrow-left{
+			background:#0EC731 !important;
+			margin-right: 16px;
+			border-radius:50%;
+		}
+	}
+}
+
+.main{
+	
+	width:100%;
+	display:flex;
+	.aside{
+		width:16%;
+		height:500px;
+		background:#F0F0F0;
+		.plusClassfy{
+			padding:20px;
+			height:10%;
+			background:#F5F5F5;
+			text-align: center;
+		}
+		.foods_list{
+			padding-left:6px;
+			h3{
+				color:#0F1215;
+				font-weight: 300;
+				font-family: '黑体','微软雅黑','宋体';
+			}
+		}
+	}
+}
