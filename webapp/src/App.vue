@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h1>{{msg}}</h1>
     <router-view></router-view>
     <spinner v-show="false"></spinner>
   </div>

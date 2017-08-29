@@ -14,6 +14,7 @@ connection.connect();
 //table:查询表，data：查询信息，callback:回调函数
 module.exports = {
     //查询:SELECT data FROM table
+
     query: function(table, data, callback) {
         connection.query("SELECT" +' '+ data +' '+ "FROM" + ' '+table, function(err, result) {
 

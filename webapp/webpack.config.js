@@ -36,6 +36,15 @@ module.exports = {
           name: '[name].[ext]?[hash]'
         }
       },
+      {   test: /\.css$/, 
+          exclude: /node_modules/,
+          loader: 'style-loader!css-loader?sourceMap' 
+      },
+      { 
+          test: /\.(woff|svg|eot|ttf)\??.*$/,
+          exclude: /node_modules/,
+          loader: 'url-loader?limit=80000&name=fonts/[name].[md5.hash.hex:7].[ext]'
+      },
       {
           test: /\.scss$/,
           exclude: /node_modules/,
@@ -47,15 +56,7 @@ module.exports = {
               loader: "sass-loader" // compiles Sass to CSS
           }]
           // loader: ExtractTextPlugin.extract("style", 'css!sass') //这里用了样式分离出来的插件，如果不想分离出来，可以直接这样写 loader:'style!css!sass'
-      },
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
-      },
-      {
-        test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
-        loader: 'file-loader'
-      }
+      } 
     ]
   },
   resolve: {

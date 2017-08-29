@@ -1,7 +1,9 @@
-
 var path = require('path');
 var haiData = require('./haiData.js');
 var goodsData= require('./goodsData.js');
+var goodsData = require('./goodsData')
+var order = require('./Order.js')
+
 exports.main = function(express) {
 
 var app = express();
@@ -24,9 +26,10 @@ app.use(express.static(path.join(path.resolve(__dirname, '../../'), '/')), funct
     // Pass to next layer of middleware
     next();
 });
-
 goodsData.goodsData(app);
 haiData.haiData(app);
+goodsData.goodsData(app)
+order.order(app)
 app.get('/', function(request, response) {
     response.send('Home Page');
 })
