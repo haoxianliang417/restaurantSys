@@ -85,7 +85,8 @@ var curStorage;
         var spanText = span.text()
         spanText++;
         var name = $(cur).closest('.bottom').siblings('.about').text()
-        var spanshow = this.storageFun(id, spanText, name)
+        var price = $(cur).closest('.button').siblings('.price').text()
+        var spanshow = this.storageFun(id, spanText, name, price)
         $(cur).closest('button').siblings('.reduceBtn').show();
         span.text(spanshow)
       },
@@ -96,10 +97,11 @@ var curStorage;
         var id = $(cur).closest('.single').attr('data-id')
         //console.log(id)
         var span = $(cur).closest('button').siblings('.detailNum');
+        var price = $(cur).closest('.button').siblings('.price').text()
         var spanText = span.text()
         spanText--;
         var name = $(cur).closest('.bottom').siblings('.about').text()
-        var spanshow = this.storageReduce(id, spanText, name)
+        var spanshow = this.storageReduce(id, spanText, name, price)
         if(spanshow <= 0){
           spanshow = 0;
           $(cur).closest('button').hide();
@@ -108,7 +110,7 @@ var curStorage;
         }
         span.text(spanshow)
       },
-      storageReduce(id,countNum,name){
+      storageReduce(id,countNum,name,price){
         curStorage = this.checkStorage();
         var spanshow;
         var res = curStorage.filter((item, idx)=>{
@@ -119,7 +121,7 @@ var curStorage;
           spanshow = res[0].count;
         }else{
         //相同加一
-          var newobj = {index:id,count:countNum,menuName:name,state:0}
+          var newobj = {index:id,count:countNum,menuName:name,menuPrice:price,state:0}
           spanshow = newobj.count
           curStorage.push(newobj)
         }
@@ -127,7 +129,7 @@ var curStorage;
         return spanshow
       },
       //localstorage存储
-      storageFun(id,countNum,name){
+      storageFun(id,countNum,name,price){
         curStorage = this.checkStorage();
         //判断当前的id是否已存在
         var spanshow;
@@ -138,8 +140,7 @@ var curStorage;
           res[0].count++
           spanshow = res[0].count;
         }else{
-        //相同加一
-          var newobj = {index:id,count:countNum,menuName:name,state:0}
+          var newobj = {index:id,count:countNum,menuName:name,menuPrice:price,state:0}
           spanshow = newobj.count
           curStorage.push(newobj)
         }

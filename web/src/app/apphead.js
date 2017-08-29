@@ -23,6 +23,9 @@ const mutations = {
 	search: (data, formData) => {
 		console.log('根路由',formData)
 		router.push({name: 'search', params:formData})
+	},
+	showdone:() => {
+		router.push({name: 'showdone'})
 	}
 
 }
@@ -45,6 +48,9 @@ const actions = {
 	},
 	search: (events, val) => {
 		events.commit('search',{searData:val})
+	},
+	showdone: (events, val) => {
+		events.commit('showdone')
 	},
 
 }

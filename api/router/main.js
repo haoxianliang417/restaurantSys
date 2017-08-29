@@ -71,7 +71,7 @@ io.on('connection',function(socket){
         socket.emit('hehe','ok');
     })
 
-
+})
 food.food(app);
 goodsData.goodsData(app)
 order.order(app)

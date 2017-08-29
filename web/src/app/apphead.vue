@@ -13,7 +13,8 @@
 
 <script>
 	import qs from 'qs'
-	
+	var waiterUrl = 'http://10.3.134.47:8888/waiter'
+	var storage = window.localStorage;
 	export default {
 		data: () => {
 			console.log(this)
@@ -30,11 +31,13 @@
 				this.$store.dispatch('dailyspecial');
 			},
 			waiter: function(){
-				/*this.$ajax.post(this.url, qs.stringify({tableNo:'8号台呼叫'}))
+				var sendObj = {orderMenuNum:8, detail:storage.getItem('billDetail'), state:0}
+				this.$ajax.post(waiterUrl, qs.stringify(sendObj))
 				.then(res=>{
+					console.log(res)
 					this.$message('已呼叫服务员，请稍等');
-				})*/
-				this.$message('已呼叫服务员，请稍等');
+				})
+				//this.$message('已呼叫服务员，请稍等');
 			},
 			classify(){
 				this.$store.dispatch('classify');
