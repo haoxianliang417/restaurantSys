@@ -16,7 +16,6 @@ module.exports = {
     //查询:SELECT data FROM table
     query: function(callback) {
         connection.query("SELECT * FROM menu", function(err, result) {
-
             if (err) {
                 console.log(err)
             } else {
@@ -25,9 +24,22 @@ module.exports = {
         
         });
     },
+
+    //查询菜系
+    hmQuery: function(table,callback){
+        connection.query('SELECT * FROM ' + table , function(err, result){
+            if(err){
+                console.log('查询出错',err);
+            }else{
+                callback(result);
+            }
+        })
+    },
+
+
     //搜索
     haiSearch: function(table,keyword,callback){
-        var searchSql = "SELECT * FROM" +' '+table +' '+" where"+ ' '+'goodsPurchaseId'+' '+ "LIKE"+' '+"'%"+ keyword +"%'";
+        var searchSql = "SELECT * FROM" +' '+table +' '+" where"+ ' '+'style'+' '+ "LIKE"+' '+"'%"+ keyword +"%'";
         connection.query(searchSql,function(err,result){
             if(err) {
                 console.log(err);
@@ -106,7 +118,7 @@ module.exports = {
     },
      //模糊查询：SELECT data FROM table WHERE key like '%needData%'
     queryAbout: function(table, data, key, needData, callback) {
-        var str = 'SELECT' +' '+ data + ' '+'FROM' +' '+table +' '+'WHERE' +' '+key +' '+'like' +' '+"'%"+ needData +"%'";
+        var str = 'SELECT' +' '+ data + ' '+'FROM' +' '+table +' '+'WHERE CONCAT'+' ('+ key +') '+'like' +' '+"'%"+ needData +"%'";
         console.log(str)
         connection.query(str, function(err, result) {
             if (err) {
@@ -167,6 +179,8 @@ module.exports = {
         }
         item = item.slice(0,-1);
         str = str.slice(0,-1);
+        console.log('dbhelper',item)
+        console.log('dbhelper123',str);
         var  addSql = 'INSERT INTO' + ' ' + table + '(' + item + ') VALUES('+ str +')';
         connection.query(addSql, arr, function (err, result) {
             if(!err){

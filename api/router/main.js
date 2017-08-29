@@ -1,6 +1,12 @@
 
 var path = require('path');
 
+var food = require('./food');
+
+
+var goodsData = require('./goodsData')
+var order = require('./Order.js')
+
 exports.main = function(express) {
 
 var app = express();
@@ -57,8 +63,6 @@ io.on('connection',function(socket){
        
     })
     socket.on('click',function(){
-    //console.log('click')
-    //socket.emit('lianjie','100000');
     console.log(io.sockets.sockets);
     io.sockets.sockets[waiter[0].uid].emit('hehe', '3');
     })
@@ -67,10 +71,9 @@ io.on('connection',function(socket){
         socket.emit('hehe','ok');
     })
 
-})
 
-
-
-
+food.food(app);
+goodsData.goodsData(app)
+order.order(app)
 server.listen(8888);
 }

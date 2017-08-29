@@ -1,0 +1,108 @@
+@import url('../food/common.scss');
+.main-reminder{
+	width: 100%;
+	overflow: hidden;
+	font-size: 0.16rem;
+	.hai-seat{
+		height: 0.35rem;
+		background: #FF8000;
+		line-height: 0.35rem;
+		color:white;
+		text-indent: 0.08rem;
+		span{
+			display: inline-block;
+			width: 45%;
+		}
+		.sp1{
+			text-align: left;
+		}
+		.sp2{
+			text-align: right;
+
+		}
+
+	}
+
+    
+	.hai-cais{
+		width: 100%;
+		float: left;
+		border-bottom: 1px solid #ddd;
+		margin-bottom: 0.05rem;
+		height: 0.8rem;
+		span{
+			display: inline-block;
+			float: left;
+			text-align: center;
+			width: 30%;
+			line-height: 0.72rem;
+			img{width: 70%;}
+		}
+		.name{
+			text-indent: 10%;
+		}
+        
+
+	}
+    .hai-cais:last-child{
+		border: none;
+	}
+	.hai-cai{
+		
+		width: 100%;
+        font-size: 0.14rem;
+        color: #5B5B5B;
+		text-align: center;
+	}
+	.hai-num{
+		height: 0.45rem;
+		border-bottom: 0.01rem solid #ddd;
+		line-height: 0.45rem;
+		span{display: inline-block;font-size: 0.14rem;}
+		.nums{width: 49%;text-align: left;text-indent: 0.16rem;
+             button{
+             	border:none;
+             	background: white;
+             	border:0.01rem solid #FF9224;
+             	border-radius: 0.05rem;
+             	width: 38%;
+             	height: 0.3rem;
+             	color:#FF9224;
+
+             }
+		}
+		.time{width: 45%;text-align: right;color:#3C3C3C;
+             ._time{color: #FF9224}
+		}
+
+	}
+	.replay{
+		width: 100%;
+		margin-top: 0.1rem; 
+		height: 1.1rem;
+		position: relative;
+		textarea{
+			width: 90%;
+			height: 0.7rem;
+			margin-left: 5%;
+			border:none;
+			resize:none;
+			border-radius: 0.1rem;
+			border:0.01rem solid #FF9224;
+			
+		}
+		button{
+			position: absolute;
+			right: 5%;
+			bottom: 3%;
+			width: 16%;
+			height: 0.3rem;
+			border-radius: 0.05rem;
+			border: none;
+			background: #FF9224;
+			color:white;
+			font-size: 0.14rem;
+			line-height: 0.3rem;
+		}
+	}
+}
