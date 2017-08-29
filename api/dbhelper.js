@@ -108,7 +108,7 @@ module.exports = {
     },
      //模糊查询：SELECT data FROM table WHERE key like '%needData%'
     queryAbout: function(table, data, key, needData, callback) {
-        var str = 'SELECT' +' '+ data + ' '+'FROM' +' '+table +' '+'WHERE' +' '+key +' '+'like' +' '+"'%"+ needData +"%'";
+        var str = 'SELECT' +' '+ data + ' '+'FROM' +' '+table +' '+'WHERE CONCAT'+' ('+ key +') '+'like' +' '+"'%"+ needData +"%'";
         console.log(str)
         connection.query(str, function(err, result) {
             if (err) {

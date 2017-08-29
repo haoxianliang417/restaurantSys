@@ -35,14 +35,25 @@ exports.order = function(app){
 		//关联类型，和菜名
 		console.log('搜索')
 		console.log(request.body)
-		db.queryAbout('menu', )
+		var key = 'menuName,type,detail,class'
+		db.queryAbout('menu', '*', key, request.body.args, function(res){
+			if(res){
+				db.account(function(num){
+					var count = JSON.stringify(num);
+					count = parseInt(count.replace(/[^0-9]/ig,''));
+					response.send({status:true, account:count, data:res})
+				})
+			}else{
+				response.send({status:false, account:'',data:[]})
+			}
+		})
 	})
 	//插入账单table,key,val,callback
 	app.post('/bill', urlencodeParser, function(request, response){
 		console.log('账单',request.body)
 		var obj = request.body;
 		db.hmInsert('bill', obj, function(res){
-			response.send({msg:'下单成功'})
+			response.send({status:true, msg:'下单成功'})
 		})
 		
 	})

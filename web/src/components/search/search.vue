@@ -1,6 +1,5 @@
 <template>
-	<div>
-		<h3>搜索</h3>
+	<div class="searchSty">
 		<showlist :baseUrl="url" :arg="arg"></showlist>
 	</div>
 	
@@ -13,17 +12,27 @@ import showlist from '../showList/showList.vue'
 		data:function(){
 			return{
 				url:this.baseUrl + 'ordersearch',
-				arg:this.$route.params.searData
+				arg:''
 			}
 		},
 		methods:{
-
+			
 		},
 		components:{
 			showlist
 		},
 		created(){
-			console.log('searVue',this.$route.params.searData)
-		}
+			this.arg = this.$route.params.searData;
+			console.log('状态：created')
+		},
+		updated(){
+			this.arg = this.$route.params.searData;
+			console.log('状态：updated')
+		},
+
 	}
 </script>
+
+<style>
+	.searchSty{margin-top:0.188rem;}
+</style>

@@ -23,7 +23,11 @@
 				console.log(this)
 				this.$ajax.post(this.url, qs.stringify(sendObj))
 				.then(res=>{
-					console.log('下单情况',res)
+					if(res.status){
+						this.$message('下单成功')
+					}else{
+						this.$message('下单失败')
+					}
 				})
 				/*var ws = io.connect('ws://10.3.134.218:8888')
 				ws.emit('data',{orderMenuNum:8, detail:newArr, state:0})

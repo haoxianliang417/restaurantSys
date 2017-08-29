@@ -21,7 +21,7 @@ const mutations = {
 		router.push({name: 'order'})
 	},
 	search: (data, formData) => {
-		console.log(formData)
+		console.log('根路由',formData)
 		router.push({name: 'search', params:formData})
 	}
 
