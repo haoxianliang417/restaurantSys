@@ -121,7 +121,7 @@ var curStorage;
           spanshow = res[0].count;
         }else{
         //相同加一
-          var newobj = {index:id,count:countNum,menuName:name,menuPrice:price,state:0}
+          var newobj = {index:id,menuName:name,menuPrice:price,count:countNum,state:0}
           spanshow = newobj.count
           curStorage.push(newobj)
         }
@@ -140,7 +140,7 @@ var curStorage;
           res[0].count++
           spanshow = res[0].count;
         }else{
-          var newobj = {index:id,count:countNum,menuName:name,menuPrice:price,state:0}
+          var newobj = {index:id,menuName:name,menuPrice:price,count:countNum,state:0}
           spanshow = newobj.count
           curStorage.push(newobj)
         }
