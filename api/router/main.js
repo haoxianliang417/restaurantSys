@@ -30,14 +30,43 @@ app.get('/', function(request, response) {
 })
 var server =require('http').createServer(app);
 var io = require('socket.io')(server);
-//socket
+// io.of('kitchen').on('connection',function(socket){
+
+//     console.log('ok');
+//     //console.log(this);
+//     socket.emit('login','hehe');
+//     socket.on('click',function(){
+//     })
+// })
+var waiter = [];
 io.on('connection',function(socket){
-    console.log('ok');
-    //console.log(this);
+    //console.log(socket);
+    //socket.emit('login','ok');
+    //console.log(socket.id)
     socket.emit('login','hehe');
-    socket.on('click',function(aaa){
-    console.log('click')
+    socket.on('login',function(obj){
+        //console.log(obj.uid);
+        console.log(obj)
+        console.log(obj.wid)
+        if(obj.wid!= undefined){
+            obj.uid=socket.id;
+            waiter.push(obj);
+            console.log(waiter)
+            console.log(waiter[0].uid);
+        }
+       
     })
+    socket.on('click',function(){
+    //console.log('click')
+    //socket.emit('lianjie','100000');
+    console.log(io.sockets.sockets);
+    io.sockets.sockets[waiter[0].uid].emit('hehe', 'ekkeke');
+    })
+    socket.on('data',function(obj){
+        console.log(obj);
+        socket.emit('hehe','ok');
+    })
+
 })
 
 

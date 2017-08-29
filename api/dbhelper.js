@@ -4,7 +4,6 @@ var mysql = require('mysql');
 //联接 mysql 服务器
 var connection = mysql.createConnection({
     host: 'localhost',
-    database: 'resale',
     user: 'root',
     password: '',
     database: 'food'
@@ -96,8 +95,8 @@ module.exports = {
             }
         });        
     },
-    queryCashier: function(barcode,callback){
-        connection.query("SELECT * FROM goodsinfor INNER JOIN goodsprice ON goodsinfor.goodsId = goodsprice.goodsId WHERE goodsinfor.codeStr = "+barcode,function(err, result){
+    queryBill: function(barcode,callback){
+        connection.query("SELECT * FROM "+table+"",function(err, result){
              if (err) {
                  console.log('查询出错！')
             } else {

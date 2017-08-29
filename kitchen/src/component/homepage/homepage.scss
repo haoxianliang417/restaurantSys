@@ -1,3 +1,23 @@
 body{
-	
+	margin:0;
+	padding:0;
+}
+.hometitle{
+	width:100%;
+	height:50px;
+	text-align:center;
+	color:white;
+	background:blue;
+	font-size:28px;
+}
+.nav{
+	width:20%;
+	background:#333;
+	display:inline-block;
+}
+.homebg{
+	display:flex;
+}
+.list{
+	width:100%;
 }
