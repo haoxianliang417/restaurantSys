@@ -1,0 +1,104 @@
+@import url('../food/common.scss');
+.main{
+	width: 100%;overflow: hidden;
+        .hai-sort{
+            width: 100%;
+            display: flex;
+            margin-top: 0.1rem;
+            div{
+                flex: 1;
+                .tel{
+                    margin-left: 0.16rem;
+                }
+                .xiala{
+                    display: inline-block;
+                    width: 40%;
+                    text-align: center;
+                    height: 0.3rem;
+                    border-bottom: 0.01rem solid #ddd;
+                }
+            }
+        }
+    	.hai-box{
+    		width: 100%;
+    		display: flex;
+            flex-wrap: wrap;
+    		span{
+    			width: 30%;
+    			height: 1rem;
+                display: flex;
+                flex-direction: column;
+                margin: 0.05rem;
+                border:1px solid #ddd;
+                border-radius: 0.05rem;
+                div{
+                    flex: 1;
+                }
+                .peoples{
+
+                    font-size: 0.12rem;
+                    color: #5B5B5B;
+                    text-indent: 0.05rem;
+
+                }
+                .state1{
+                    width: 0.5rem;
+                    height: 0.5rem;
+                    border: 0.02rem solid #FFD306;
+                    color: #FFD306;
+                    border-radius: 50%;
+                    text-align: center;
+                    line-height: 0.5rem;
+                    font-weight: 600;
+                    margin: 0 auto;
+                }
+                .state2{
+                    width: 0.5rem;
+                    height: 0.5rem;
+                    border: 0.02rem solid #019858;
+                    color:  #019858;
+                    border-radius: 50%;
+                    text-align: center;
+                    line-height: 0.5rem;
+                    font-weight: 600;
+                    margin: 0 auto;
+                }
+                .state3{
+                    width: 0.5rem;
+                    height: 0.5rem;
+                    border: 0.02rem solid   #FF5151;
+                    color:  #FF5151;
+                    border-radius: 50%;
+                    text-align: center;
+                    line-height: 0.5rem;
+                    font-weight: 600;
+                    margin: 0 auto;
+                }
+                .state4{
+                    width: 0.5rem;
+                    height: 0.5rem;
+                    border: 0.02rem solid   #4F4F4F;
+                    border-radius: 50%;
+                    text-align: center;
+                    line-height: 0.5rem;
+                    font-weight: 600;
+                    margin: 0 auto;
+                }
+                .name{
+                    color: #4F4F4F;
+                    text-align: center;
+                }
+    		}
+    	}
+        .active1{
+         border:1px solid #ddd;
+        }
+        .active2{
+            border:1px solid red;
+        }
+        .active3{
+            border:1px solid yellow;
+        }
+    
+
+}

@@ -1,13 +1,14 @@
 var db = require('../dbhelper.js');
 var bodyParser = require('body-parser');
 var urlencodeParser = bodyParser.urlencoded({
-	extended: true
+	extended: true,
 });
 
 exports.goodsData = function(app) {
 	//获取商品信息
 	app.get('/goodsData', urlencodeParser, function(request, response) {
-		db.query('goodsinfor', '*', function(res) {
+		//console.log(9999)
+		db.query(function(res) {
 			response.send({status:true, msg:'获取信息', goodsData:res});
 		})
 	});

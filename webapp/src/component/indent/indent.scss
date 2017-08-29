@@ -1,0 +1,44 @@
+@import url('../food/common.scss');
+.main{
+	width: 100%;
+	overflow: hidden;
+
+	.total{
+		font-size: 0.12rem;
+		color:#8E8E8E;
+		height:0.3rem;
+		border-bottom: 0.01rem solid #ddd;
+		line-height: 0.3rem;
+	}
+	.hai-title{
+		display: inline-block;
+		color: #ddd;
+		font-size:0.16rem;
+	}
+	.hai-content{
+		display: inline-block;
+		width: 70%;
+		
+		margin-left: 5%;
+		text-align: center;
+	}
+	.hai-btn{
+		width: 100%;
+        margin-top: 0.2rem;
+		span{
+			display: inline-block;
+            width: 49%;
+            text-align: center;
+            button{
+            	width: 40%;
+            	font-size: 0.18rem;
+            	border:none;
+            	outline: none;
+            	color: white;
+            	border-radius: 0.05rem;
+            }
+            .btn1{background: #E1E100;}
+            .btn2{background: #00BB00;}
+		}
+	}
+}
