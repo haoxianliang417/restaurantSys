@@ -60,7 +60,7 @@ io.on('connection',function(socket){
     //console.log('click')
     //socket.emit('lianjie','100000');
     console.log(io.sockets.sockets);
-    io.sockets.sockets[waiter[0].uid].emit('hehe', 'ekkeke');
+    io.sockets.sockets[waiter[0].uid].emit('hehe', '3');
     })
     socket.on('data',function(obj){
         console.log(obj);
