@@ -104,6 +104,21 @@ body{
 		}
 		.container{
 			width:100%;
+			
+			
+			.container_top{
+				width:100%;
+			}
+			.content{
+
+			}
+			.search{
+				width:40%;
+				margin-bottom:10px;
+				#searchInput{
+					height:33.33px;
+				}
+			}
 			.edit_btn{
 				padding-left:10px;
 				width:60%;
