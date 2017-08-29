@@ -2,22 +2,22 @@
 <div class="classifyStyle">
   <el-tabs v-model="activeName" @tab-click="handleClick">
     <el-tab-pane label="能量荤配" name="first">
-      <showlist></showlist>
+      <showlist :baseUrl="url"></showlist>
     </el-tab-pane>
     <el-tab-pane label="田园时蔬" name="second">
-      <showlist></showlist>
+      <showlist :baseUrl="url"></showlist>
     </el-tab-pane>
     <el-tab-pane label="粗食辅助" name="third">
-      <showlist></showlist>
+      <showlist :baseUrl="url"></showlist>
     </el-tab-pane>
     <el-tab-pane label="举杯豪情" name="fourth">
-      <showlist></showlist>
+      <showlist :baseUrl="url"></showlist>
     </el-tab-pane>
     <el-tab-pane label="甜点" name="five">
-      <showlist></showlist>
+      <showlist :baseUrl="url"></showlist>
     </el-tab-pane>
     <el-tab-pane label="果盘" name="six">
-      <showlist></showlist>
+      <showlist :baseUrl="url"></showlist>
     </el-tab-pane>
   </el-tabs>
   
@@ -28,7 +28,8 @@ import showlist from '../showList/showList.vue'
   export default {
     data() {
       return {
-        activeName: 'first'
+        activeName: 'first',
+        url:this.baseUrl + 'paging'
       };
     },
     methods: {

@@ -1,12 +1,17 @@
 <template>
 	<div class="recomStyle">
-		<showlist></showlist>
+		<showlist :baseUrl="url"></showlist>
 	</div>
 </template>
 
 <script>
 	import showlist from '../showList/showList.vue'
 	export default{
+		data:function(){
+			return {
+				url:this.baseUrl + 'paging'
+			}
+		},
 		components:{
 			showlist
 		}

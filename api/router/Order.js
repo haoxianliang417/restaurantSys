@@ -15,7 +15,7 @@ exports.order = function(app){
 	//分页
 	app.post('/paging', urlencodeParser, function(request, response){
 		//table, startNum, endNum, callback
-		console.log('请求数据', request.body)
+		//console.log('请求数据', request.body)
 		var startNum = request.body.startNum;
 		var num = request.body.num;
 		db.paging('menu', startNum, num, function(res){
@@ -29,5 +29,21 @@ exports.order = function(app){
 				response.send({status:false, account:'',data:[]})
 			}
 		})
+	})
+	//搜索//查询：SELECT data FROM table WHERE key="need" table, data, key, needData, callback
+	app.post('/ordersearch', urlencodeParser, function(request, response){
+		//关联类型，和菜名
+		console.log('搜索')
+		console.log(request.body)
+		db.queryAbout('menu', )
+	})
+	//插入账单table,key,val,callback
+	app.post('/bill', urlencodeParser, function(request, response){
+		console.log('账单',request.body)
+		var obj = request.body;
+		db.hmInsert('bill', obj, function(res){
+			response.send({msg:'下单成功'})
+		})
+		
 	})
 }

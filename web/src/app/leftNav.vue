@@ -26,6 +26,10 @@
       <i class="el-icon-edit"></i>
       <span slot="title">已点菜</span>
     </el-menu-item>
+    <el-menu-item index="2" @click="order">
+      <i class="fa fa-arrow-down" aria-hidden="true"></i>
+      <span slot="title">下单</span>
+    </el-menu-item>
     <el-menu-item index="3">
       <i class="el-icon-document"></i>
       <span slot="title">账单</span>
@@ -46,6 +50,9 @@
       },
       handleClose(key, keyPath) {
         console.log(key, keyPath);
+      },
+      order(){
+        this.$store.dispatch('order');
       }
     }
   }

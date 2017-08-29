@@ -16,6 +16,13 @@ const mutations = {
 	},
 	steps: () => {
 		router.push({name: 'steps'})
+	},
+	order: () => {
+		router.push({name: 'order'})
+	},
+	search: (data, formData) => {
+		console.log(formData)
+		router.push({name: 'search', params:formData})
 	}
 
 }
@@ -32,7 +39,14 @@ const actions = {
 	},
 	steps: (events) => {
 		events.commit('steps')
-	}
+	},
+	order: (events) => {
+		events.commit('order')
+	},
+	search: (events, val) => {
+		events.commit('search',{searData:val})
+	},
+
 }
 
 export default {

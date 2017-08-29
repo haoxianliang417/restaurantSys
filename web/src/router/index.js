@@ -6,6 +6,8 @@ import dailyspecialCom from '../components/dailySpecial/dailyspecial.vue'
 import recommendCom from '../components/recommend/recommend.vue'
 import classifyCom from '../components/classify/classify.vue'
 import stepsCom from '../components/steps/steps.vue'
+import orderCom from '../components/order/order.vue'
+import searchCom from '../components/search/search.vue'
 
 Vue.use(VueRouter)
 
@@ -34,6 +36,16 @@ const router = new VueRouter({
 		path:'/steps',
 		name:'steps',
 		component:stepsCom
+	},
+	{
+		path:'/order',
+		name:'order',
+		component:orderCom
+	},
+	{
+		path:'/search',
+		name:'search',
+		component:searchCom
 	},
 	]
 })
