@@ -1,0 +1,1 @@
+export const hai =  "http://localhost:8888/"

@@ -27,7 +27,7 @@
 
 			  <el-col :span="16">
 				  <div class="grid-content bg-purple">
-				      <span class="title">{{$route.params.id}}</span>
+				      <span class="title"><span v-if='!$route.params.id'>首页</span>{{$route.params.id}}</span>
 				  </div>
 			  </el-col>
 

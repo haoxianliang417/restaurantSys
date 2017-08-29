@@ -4,7 +4,6 @@ var mysql = require('mysql');
 //联接 mysql 服务器
 var connection = mysql.createConnection({
     host: 'localhost',
-    database: 'resale',
     user: 'root',
     password: '',
     database: 'food'
@@ -15,8 +14,8 @@ connection.connect();
 //table:查询表，data：查询信息，callback:回调函数
 module.exports = {
     //查询:SELECT data FROM table
-    query: function(callback) {
-        connection.query("SELECT * FROM menu", function(err, result) {
+    query: function(table, data, callback) {
+        connection.query("SELECT" +' '+ data +' '+ "FROM" + ' '+table, function(err, result) {
 
             if (err) {
                 console.log(err)
@@ -28,7 +27,8 @@ module.exports = {
     },
     //搜索
     haiSearch: function(table,keyword,callback){
-        var searchSql = "SELECT * FROM" +' '+table +' '+" where"+ ' '+'goodsPurchaseId'+' '+ "LIKE"+' '+"'%"+ keyword +"%'";
+       // var searchSql = "SELECT * FROM" +' '+table +' '+" where"+ ' '+'goodsPurchaseId'+' '+ "LIKE"+' '+"'%"+ keyword +"%'";
+          var searchSql = "SELECT * FROM" +' '+table +' '+" where"+ ' '+'persons'+' '+ "LIKE"+' '+"'%"+ keyword +"%'";
         connection.query(searchSql,function(err,result){
             if(err) {
                 console.log(err);

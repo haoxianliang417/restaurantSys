@@ -1,38 +1,32 @@
 <template>
-   <div>
-       <hai-head></hai-head>
-       <div class="main">
-		  <el-table
-		    :data="tableData"
-		    border
-		    style="width: 100%"
-		    :default-sort = "{prop: 'date', order: 'descending'}"
-		    >
-		    <el-table-column
-		      prop="date"
-		      label="座位号"
-		      align='center'
-		      sortable
-		      >
-		    </el-table-column>
-		    <el-table-column
-		      prop="name"
-		      label="餐桌型号"
-		      align='center'
-		      sortable
-		      >
-		    </el-table-column>
-		    <el-table-column
-		      prop="address"
-		      label="是否使用中"
-		      align='center'
-		      :formatter="formatter">
-		    </el-table-column>
-		  </el-table>
-
-	   </div>
-	   <hai-foot></hai-foot>
-   </div>
+  <div>
+  <hai-head></hai-head>
+  <el-table
+    :data="tableData"
+    border
+    style="width: 100%"
+    :default-sort = "{prop: 'date', order: 'descending'}"
+    >
+    <el-table-column
+      prop="date"
+      label="餐桌"
+      sortable
+      >
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="型号"
+      sortable
+      >
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="是否使用中"
+      :formatter="formatter">
+    </el-table-column>
+  </el-table>
+  <hai-foot></hai-foot>
+  </div>
 </template>
 
 <script>
