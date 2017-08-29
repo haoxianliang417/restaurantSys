@@ -1,7 +1,7 @@
 var db = require('../dbhelper.js');
 var bodyParser = require('body-parser');
 var urlencodeParser = bodyParser.urlencoded({
-	extended: true
+	extended: true,
 });
 
 exports.goodsData = function(app) {

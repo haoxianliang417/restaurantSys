@@ -15,7 +15,7 @@ exports.order = function(app){
 	//分页
 	app.post('/paging', urlencodeParser, function(request, response){
 		//table, startNum, endNum, callback
-		//console.log('请求数据', request.body)
+		console.log('请求数据', request.body)
 		var startNum = request.body.startNum;
 		var num = request.body.num;
 		db.paging('menu', startNum, num, function(res){
