@@ -1,21 +1,20 @@
 <template>
-<div>
+<div class="content">
 	<el-row class="showList">
-	  <el-col :span="5" v-for="(value, index) in data" :key="index" :offset="index> 0 ? 1 : 0" class="single" >
+	  <el-col :span="5" v-for="(value, index) in this.$store.state.apphead.search" :key="value.menuId" :offset="index> 0 ? 1 : 0" class="single" :data-id="value.menuId">
 	    <el-card :body-style="{ padding: '0px' }">
 	      <img :src="'src/assets/images/'+ value.img[0]" class="image" @click="dialogVisible = true"/>
 	      <div class="gooddel">
-        <p class="about">{{value.menuName}}</p>
+          <p class="about">{{value.menuName}}</p>
 	        <div class="bottom">
-          <p class="price">{{value.menuPrice}}</p>
+            <p class="price">{{value.menuPrice}}</p>
             <div class="button">
-              <el-button type="text" @click="reduce" v-show="show"><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></el-button>
-              <span>{{num}}</span>
+              <el-button type="text" @click="reduce" v-show="value.count <= 0 ? false : true" class="reduceBtn"><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></el-button>
+              <span class="detailNum">{{value.count <= 0 ? '' : value.count}}</span>
   	          <el-button type="text" @click="add"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></el-button>
             </div>
 	        </div>
 	      </div>
-        
 	    </el-card>
 	  </el-col>
 	</el-row>
@@ -33,7 +32,7 @@
     :visible.sync="dialogVisible"
     size="large">
       <el-carousel indicator-position="none" >
-        <el-carousel-item v-for="(value, index) in data" :key="index">
+        <el-carousel-item v-for="(value, index) in data" :key="value.menuId">
           <div>
             <p class="detailName">{{value.menuName}}</p>
             <div class="itemPage">
@@ -41,8 +40,8 @@
               <div>
                 <p class="detailSty">{{value.detail}}</p>
                 <div class="detailBtn">
-                  <el-button type="text" @click="reduce" v-show="show"><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></el-button>
-                  <span class="detailNum">{{num}}</span>
+                  <el-button type="text" @click="reduce" v-show="show" class="reduceBtn"><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></el-button>
+                  <span class="detailNum">{{value.count <= 0 ? '' : value.count}}</span>
                   <el-button type="text" @click="add"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></el-button>
                 </div>
               </div>
@@ -55,65 +54,157 @@
 </template>
 
 <script>
-import axios from 'axios'
 import qs from 'qs'
-let baseUrl = 'http://localhost:8888/' + 'paging';
+import $ from 'jquery'
+var storage = window.localStorage;
+var curStorage;
 	export default{
 		data (){
 			return{
 				currentDate: new Date(),
-        num:'',
         show:false,
         data:[],
         curpage: 1,
         pageSize:8,
         totalAct:20,
-        dialogVisible: false
+        dialogVisible: false,
+        storageData:[]
 			}
 		},
+    props:['baseUrl','arg'],
 		methods:{
+      //添加
       add(event){
-        this.num++;
-        console.log(this.num)
-        if(this.num >= 1){
-          this.show = true
-        }
-        
+        //点击添加，遍历localstorage,赋值给span
+        //获取当前的data-id的值
+        var cur = event.target;
+        //console.log(cur)
+        var id = $(cur).closest('.single').attr('data-id')
+        //console.log(id)
+        var span = $(cur).closest('button').siblings('.detailNum');
+        var spanText = span.text()
+        spanText++;
+        var name = $(cur).closest('.bottom').siblings('.about').text()
+        var price = $(cur).closest('.button').siblings('.price').text()
+        var spanshow = this.storageFun(id, spanText, name, price)
+        $(cur).closest('button').siblings('.reduceBtn').show();
+        span.text(spanshow)
       },
-      reduce(){
-        this.num--;
-        if(this.num <= 0){
-          this.show = false;
-          this.num = ''
+      //减少
+      reduce(event){
+        var cur = event.target;
+        //console.log(cur)
+        var id = $(cur).closest('.single').attr('data-id')
+        //console.log(id)
+        var span = $(cur).closest('button').siblings('.detailNum');
+        var price = $(cur).closest('.button').siblings('.price').text()
+        var spanText = span.text()
+        spanText--;
+        var name = $(cur).closest('.bottom').siblings('.about').text()
+        var spanshow = this.storageReduce(id, spanText, name, price)
+        if(spanshow <= 0){
+          spanshow = 0;
+          $(cur).closest('button').hide();
+          span.text('')
+          return
         }
+        span.text(spanshow)
       },
+      storageReduce(id,countNum,name,price){
+        curStorage = this.checkStorage();
+        var spanshow;
+        var res = curStorage.filter((item, idx)=>{
+          return item.index == id
+        })
+        if(res.length > 0){
+          res[0].count--
+          spanshow = res[0].count;
+        }else{
+        //相同加一
+          var newobj = {index:id,menuName:name,menuPrice:price,count:countNum,state:0}
+          spanshow = newobj.count
+          curStorage.push(newobj)
+        }
+        storage.setItem('billDetail',JSON.stringify(curStorage))
+        return spanshow
+      },
+      //localstorage存储
+      storageFun(id,countNum,name,price){
+        curStorage = this.checkStorage();
+        //判断当前的id是否已存在
+        var spanshow;
+        var res = curStorage.filter((item, idx)=>{
+          return item.index == id
+        })
+        if(res.length > 0){
+          res[0].count++
+          spanshow = res[0].count;
+        }else{
+          var newobj = {index:id,menuName:name,menuPrice:price,count:countNum,state:0}
+          spanshow = newobj.count
+          curStorage.push(newobj)
+        }
+        storage.setItem('billDetail',JSON.stringify(curStorage))
+        return spanshow
+      },
+      checkStorage(){
+          //判断当前的是否已存在 
+          curStorage = storage.getItem('billDetail') 
+          if(curStorage == null){
+            curStorage = [];
+          }
+          if(curStorage.length > 0){
+            curStorage = JSON.parse(curStorage);
+          }
+          //console.log('curStorage',curStorage)
+          return curStorage
+      },
+      //显示数据数量
       handleSizeChange(val) {
         this.pageSize = val;
         this.ajaxData(this.curpage, this.pageSize)
       },
+      //页数切换
       handleCurrentChange(val) {
         this.curpage = val;
-        console.log(val)
+        //console.log(val)
         this.ajaxData(this.curpage, this.pageSize)
       },
+      //数据请求
       ajaxData(start, num){
+
         var startN = (start-1)*num;
-        console.log(startN,num)
-        var postData = {startNum: startN, num: num}
-        console.log('axios',axios)
-        axios.post(baseUrl, qs.stringify(postData) )
+        //console.log(startN,num)
+        var postData = {startNum: startN, num: num, args: this.arg}
+        var countArr = this.checkStorage()
+        //axios的post请求
+        this.$ajax.post(this.baseUrl, qs.stringify(postData) )
         .then(res=>{
-          console.log(res)
           var arr = res.data.data
+          //console.log('原始数据',arr)
+          //添加已点的菜的数量********************************
+          //console.log('获取storage',countArr)
           arr.forEach((item, idx)=>{
             item.img = item.img.replace(/^\[/,'').replace(/\]$/,'').split(',')
+
+            item.count ='';
+            for(var i=0; i<countArr.length; i++){
+              if(countArr[i].index == item.menuId){
+                //console.log(88888)
+                item.count = countArr[i].count
+              }
+            }
           })
           this.totalAct = res.data.account;
           this.data = arr;
+          this.$store.state.apphead.search = arr
+          //console.log('添加了数量',arr)
         })
       }
 		},
     created(){
+      //console.log('showCreat')
+      this.storageData = this.checkStorage()
       this.ajaxData(this.curpage, this.pageSize)
     }
 	}
@@ -128,7 +219,10 @@ let baseUrl = 'http://localhost:8888/' + 'paging';
     width: 100%;
     display: block;
   }
-  .gooddel{line-height:0.15rem;}
+  .gooddel{line-height:0.15rem;
+    .detailNum{font-size:0.17rem}
+    span{font-size:0.08rem}
+  }
   .showList{display:flex;flex-wrap:wrap;
     .single{margin-bottom:0.15rem;margin-right:0.226rem;position:relative}
   }

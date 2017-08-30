@@ -5,7 +5,6 @@
     <spinner v-show="false"></spinner>
   </div>
 </template>
-
 <script>
 import spinner from './component/spinner/spinner.vue'
 

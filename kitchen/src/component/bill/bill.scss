@@ -1,0 +1,58 @@
+body,ul,li,table{
+	margin:0;
+	padding:0;
+}
+li{list-style:none;
+
+}
+.bills{
+	display:flex;
+	flex-wrap:wrap;
+
+}
+.trul{
+	width:30%;
+	border:1px #ccc solid;
+	margin:2px;
+	position:relative;
+	border-radius:5px;
+}
+.table{
+	width:98%;
+	height:50px;
+	line-height:50px;
+	text-align:center;
+	margin:2px;
+	border-radius:5px;
+}
+.billsli{
+	padding-left:15px;
+	margin-bottom:2px;
+	position:relative;
+	.state{
+		position:absolute;
+		right: 0;
+		margin-right:10px;
+		font-size:12px;
+		display: inline-block;
+		vertical-align: middle; 
+	}
+}
+.billsli:nth-of-type(1){
+	margin-top:10px;
+}
+.callbg{
+	position:relative;
+	margin-top:30px;
+	margin-bottom:10px;
+	.callNum{
+		display: inline-block;
+		line-height: 36px;
+		height: 36px;
+		padding-left:15px;
+	}
+	.call{
+		position:absolute;
+		right:10px;
+	}
+}
