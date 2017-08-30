@@ -102,7 +102,7 @@
 		},
 		methods: {
 			hidde(){
-				this.show = false;
+				this.show = false;1
 			}
 		},
 		created(){
@@ -114,7 +114,7 @@
 				serving: '1'
 			};
             
-            Vue.prototype.socket = io.connect('ws://10.3.134.41:8888');
+            Vue.prototype.socket = io.connect('ws://localhost:8888');
 			Vue.prototype.socket.emit('login',{wid:'hai'});
 			Vue.prototype.socket.on('connect',function(){
 				console.log('连接成功');
