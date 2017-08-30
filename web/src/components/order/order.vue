@@ -8,7 +8,7 @@
     style="width: 100%" 
     @selection-change="handleSelectionChange">
     <el-table-column className="index"
-    	prop="index"
+    	prop="menuId"
       	label="菜号"
       	width="80">
     </el-table-column>
@@ -84,7 +84,8 @@
 				url:this.baseUrl + 'bill',
 				showData: [],
 				dialogVisible:false,
-				orderVisible:false
+				orderVisible:false,
+				orderList:[]
 			}
 		},
 		methods:{
@@ -111,9 +112,9 @@
 				
 			},
 			getStorage(){
-				var storage = window.localStorage;
-				var data = JSON.parse(storage.getItem('billDetail'));
+				var data = JSON.parse(this.storage.getItem('billDetail'));
 				//过滤count为0的
+				console.log('清单',data)
 				var newArr = data.filter((item, idx) => {
 					item.smalltotal = item.menuPrice * item.count;
 					return item.count != 0
@@ -133,7 +134,7 @@
 		       	var addArr = this.getStorage();
 		       	//循环遍历
 		       	addArr.forEach((item,idx)=>{
-		       		if(id == item.index){
+		       		if(id == item.menuId){
 		       			item.count++
 		       			span++
 		       		}
@@ -150,7 +151,7 @@
 		        var span = $(cur).closest('td').siblings('.countText').find('div');
 		        var reduceArr = this.getStorage()
 		        reduceArr.forEach((item,idx)=>{
-		       		if(id == item.index){
+		       		if(id == item.menuId){
 		       			item.count--
 		       			span--
 		       		}
@@ -167,7 +168,7 @@
 			        var id = $(cur).closest('td').siblings('.index').find('div').text()
 			        var delArr = this.getStorage();
 			        delArr.forEach((item,idx)=>{
-			        	if(item.index == id){
+			        	if(item.menuId == id){
 			        		delArr.splice(idx, 1)
 			        	}	
 			        })
@@ -176,8 +177,7 @@
 		        })
 		      },
 		      pushStorage(str){
-		      		var storage = window.localStorage;
-		      		storage.setItem('billDetail', str)
+		      		this.storage.setItem('billDetail', str)
 		      },
 			toggleSelection(rows) {
 		        if (rows) {

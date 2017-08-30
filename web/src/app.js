@@ -13,7 +13,10 @@ socket.on('connect',function(){
 	console.log('socket连接成功')
 })
 Vue.use(ElementUI)
+
 Vue.prototype.$ajax = axios
+
+Vue.prototype.storage = window.localStorage
 
 var designWidth = 768, rem2px = 100;
 document.documentElement.style.fontSize =

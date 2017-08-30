@@ -79,12 +79,12 @@
 		            item.img = item.img.replace(/^\[/,'').replace(/\]$/,'').split(',')
 		            item.count ='';
 		            for(var i=0; i<countArr.length; i++){
-		              if(countArr[i].index == item.menuId){
-		                //console.log(88888)
+		              if(countArr[i].menuId == item.menuId){
 		                item.count = countArr[i].count
 		              }
 		            }
 		          })
+		          this.$store.state.showlist.totalAct = res.data.account;
 		          this.$store.state.apphead.search = arr
 		        })
 			}
