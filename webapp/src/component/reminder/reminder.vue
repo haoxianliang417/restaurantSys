@@ -16,12 +16,12 @@
 					    <div class="hai-box">
 					       <div class="hai-cai">已点菜单</div>
 	                       <div class="hai-cais">
-	                         <span><img src='../../assets/img/1.jpg' /></span>
+	                         <span><img src='src/assets/img/1.jpg' /></span>
 	                         <span class="name">红烧鱼</span>
 	                         <span class="num">x2</span>
 	                       </div>
 	                       	 <div class="hai-cais">
-	                         <span><img src='../../assets/img/1.jpg' /></span>
+	                         <span><img src='src/assets/img/1.jpg' /></span>
 	                         <span class="name">红烧鱼</span>
 	                         <span class="num">x2</span>
 	                       </div>

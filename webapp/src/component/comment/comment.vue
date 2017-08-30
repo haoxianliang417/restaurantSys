@@ -25,7 +25,7 @@
 							  	    <el-pagination
 									  small
 									  layout="prev, pager, next"
-									  :total="30">
+									  :total="10">
 									</el-pagination>  
 							  </div></el-col>
 							</el-row>

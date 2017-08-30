@@ -14,12 +14,16 @@ exports.haiData = function(app){
 	}),
 	//带条件搜索
 	app.post('/select',urlencodeParser,function(request,response){
-		db.haiSearch(request.body.database,request.body.keyword,function(res){
-			response.send({status:true, msg:'获取信息', data:res});
+		console.log(request.body);
+		console.log(request.body.key);
+		console.log(request.body.keyword);
+		db.haiSearch(request.body.database,request.body.key,request.body.keyword,function(res){
+			response.send({status:true, msg:'获取信息123', data:res});
 		})
 	})
-	//老高传输局
+	//老高传数据
 	app.post('/waiter',urlencodeParser,function(request,response){
 		console.log(request.body);
+		response.send({state:'老高'});
 	})
 }

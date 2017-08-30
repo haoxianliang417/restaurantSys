@@ -27,9 +27,9 @@ module.exports = {
         });
     },
     //搜索
-    haiSearch: function(table,keyword,callback){
+    haiSearch: function(table,key,keyword,callback){
        // var searchSql = "SELECT * FROM" +' '+table +' '+" where"+ ' '+'goodsPurchaseId'+' '+ "LIKE"+' '+"'%"+ keyword +"%'";
-          var searchSql = "SELECT * FROM" +' '+table +' '+" where"+ ' '+'persons'+' '+ "LIKE"+' '+"'%"+ keyword +"%'";
+          var searchSql = "SELECT * FROM" +' '+table +' '+" where"+ ' '+key+' '+ "LIKE"+' '+"'%"+ keyword +"%'";
         connection.query(searchSql,function(err,result){
             if(err) {
                 console.log(err);
