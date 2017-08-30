@@ -1,6 +1,6 @@
 <template>
 	<div class="recomStyle">
-		<showlist :baseUrl="url"></showlist>
+		<showlist :baseUrl="url" :arg="arg"></showlist>
 	</div>
 </template>
 
@@ -9,11 +9,16 @@
 	export default{
 		data:function(){
 			return {
-				url:this.baseUrl + 'paging'
+				url:this.baseUrl + 'paging',
+				arg:''
 			}
 		},
 		components:{
 			showlist
+		},
+		created(){
+			this.arg = ''
+			console.log('推荐',this.$store.state)
 		}
 	}
 </script>

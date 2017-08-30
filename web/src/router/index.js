@@ -15,7 +15,7 @@ const router = new VueRouter({
 	routes: [{
 		path: '/',
 		name: 'home',
-		component: HomeComponent,
+		component: recommendCom,
 	},
 	{
 		path:'/dailyspecial',

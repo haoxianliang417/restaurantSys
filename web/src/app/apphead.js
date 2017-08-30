@@ -2,6 +2,7 @@ import Vue from 'vue'
 import router from '../router/index.js'
 
 const state = {
+	search:[]
 }
 
 const mutations = {
@@ -20,9 +21,16 @@ const mutations = {
 	order: () => {
 		router.push({name: 'order'})
 	},
-	search: (data, formData) => {
-		console.log('根路由',formData)
-		router.push({name: 'search', params:formData})
+	search: () => {
+		//router.push({name: 'search'})
+	},
+	searchshow: (data, formdata) =>{
+		console.log('点击事件',formdata)
+		//this.a.state.searData = formdata.searData;
+		Vue.prototype.sear = formdata;
+		state.search = formdata;
+		console.log(this)
+		/*router.push({name: 'search',params:formdata})*/
 	},
 	showdone:() => {
 		router.push({name: 'showdone'})
@@ -46,8 +54,11 @@ const actions = {
 	order: (events) => {
 		events.commit('order')
 	},
-	search: (events, val) => {
-		events.commit('search',{searData:val})
+	search: (events) => {
+		events.commit('search')
+	},
+	searchshow: (events,val) => {
+		events.commit('searchshow',{searData:val})
 	},
 	showdone: (events, val) => {
 		events.commit('showdone')

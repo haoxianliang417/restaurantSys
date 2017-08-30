@@ -1,7 +1,7 @@
 <template>
 <div class="content">
 	<el-row class="showList">
-	  <el-col :span="5" v-for="(value, index) in data" :key="value.menuId" :offset="index> 0 ? 1 : 0" class="single" :data-id="value.menuId">
+	  <el-col :span="5" v-for="(value, index) in this.$store.state.apphead.search" :key="value.menuId" :offset="index> 0 ? 1 : 0" class="single" :data-id="value.menuId">
 	    <el-card :body-style="{ padding: '0px' }">
 	      <img :src="'src/assets/images/'+ value.img[0]" class="image" @click="dialogVisible = true"/>
 	      <div class="gooddel">
@@ -175,7 +175,7 @@ var curStorage;
 
         var startN = (start-1)*num;
         //console.log(startN,num)
-        var postData = {startNum: startN, num: num, args:this.arg}
+        var postData = {startNum: startN, num: num, args: this.arg}
         var countArr = this.checkStorage()
         //axios的post请求
         this.$ajax.post(this.baseUrl, qs.stringify(postData) )
@@ -197,11 +197,13 @@ var curStorage;
           })
           this.totalAct = res.data.account;
           this.data = arr;
+          this.$store.state.apphead.search = arr
           //console.log('添加了数量',arr)
         })
       }
 		},
     created(){
+      //console.log('showCreat')
       this.storageData = this.checkStorage()
       this.ajaxData(this.curpage, this.pageSize)
     }

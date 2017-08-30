@@ -1,6 +1,6 @@
 <template>
 	<div class="showdoneSty">
-	<h3>已点菜</h3>
+	<h3>您的订单</h3>
 	 <el-table
     ref="multipleTable"
     :data="showData"
@@ -55,9 +55,8 @@
   </div>
   <el-dialog
   title="提示"
-  :visible.sync="dialogVisible"
   size="tiny"
-  :before-close="handleClose">
+  :before-close="deleteBtn">
   <span>确定删除？</span>
   <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
@@ -66,10 +65,9 @@
 </el-dialog>
 <el-dialog
   title="提示"
-  :visible.sync="orderVisible"
   size="tiny"
-  :before-close="handleClose">
-  <span>确定删除？</span>
+  :before-close="sendBill">
+  <span>确定下单？</span>
   <span slot="footer" class="dialog-footer">
     <el-button @click="orderVisible = false">取 消</el-button>
     <el-button type="primary" @click="orderVisible = false">确 定</el-button>
@@ -104,7 +102,7 @@
 								this.$message('下单失败')
 							}
 						})
-						var ws = io.connect('ws://10.3.134.218:8888')
+						var ws = io.connect('ws://10.3.134.41:8888')
 						ws.emit('data',{orderMenuNum:8, detail:newArr, state:0})
 						ws.on('hehe',function(res){
 							console.log(res)
@@ -193,13 +191,6 @@
 		    handleSelectionChange(val) {
 		        this.multipleSelection = val;
 		    },
-		    handleClose(done) {
-		        this.$confirm('确认关闭？')
-		          .then(_ => {
-		            done();
-		          })
-		          .catch(_ => {});
-		      }
 		},
 		created(){
 			var arr = this.getStorage();
@@ -210,7 +201,7 @@
 
 <style lang="scss">
 	.showdoneSty{margin-top:0.075rem;
-		h3{font-size:0.226rem;font-style:normal;margin-bottom:0.075rem}
+		h3{font-size:0.206rem;font-style:normal;margin-bottom:0.075rem}
 	}
 	.actionBtn{
 		button{border-radius:50%}
