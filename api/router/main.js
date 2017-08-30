@@ -3,7 +3,7 @@ var path = require('path');
 
 var food = require('./food');
 
-
+var haiDate = require('./haiData.js');
 var goodsData = require('./goodsData')
 var order = require('./Order.js')
 var bill = require('./bill.js')
@@ -127,6 +127,7 @@ io.on('connection',function(socket){
     })
 
 })
+haiDate.haiData(app);
 food.food(app);
 goodsData.goodsData(app)
 order.order(app)

@@ -24,6 +24,16 @@ module.exports = {
         
         });
     },
+    hquery: function(table,data,callback) {
+        connection.query("SELECT "+' '+data+' '+ "FROM" +' '+table, function(err, result) {
+            if (err) {
+                console.log(err)
+            } else {
+                callback(result);
+            } 
+        
+        });
+    },
 
     //查询菜系
     hmQuery: function(table,callback){

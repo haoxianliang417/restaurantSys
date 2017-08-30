@@ -8,12 +8,13 @@ exports.haiData = function(app){
 	//无条件搜索
 	app.post('/find',urlencodeParser,function(request,response){
 		console.log(request.body);
-		db.query(request.body.database, '*', function(res) {
+		db.hquery(request.body.database, '*', function(res) {
 			response.send({status:true, msg:'获取信息', data:res});
 		})
 	}),
 	//带条件搜索
 	app.post('/select',urlencodeParser,function(request,response){
+		console.log(123)
 		console.log(request.body);
 		console.log(request.body.key);
 		console.log(request.body.keyword);
