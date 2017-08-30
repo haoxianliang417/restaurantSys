@@ -13,7 +13,6 @@
 
 <script>
 	import qs from 'qs'
-	var waiterUrl = 'http://10.3.134.50:8888/waiter'
 	var storage = window.localStorage;
 	export default {
 		data: () => {
@@ -32,7 +31,7 @@
 				this.$store.dispatch('dailyspecial');
 			},
 			waiter: function(){
-				var socket = io.connect('ws://10.3.134.41:8888')
+				var socket = io.connect('ws://localhost:8888')
 				socket.emit('waiter',{status:'呼叫二师兄'})
 				/*socket.on('receive',function(res){
 					console.log(res)
