@@ -20,7 +20,6 @@
 			console.log(this)
 			return{
 				url: this.baseUrl + 'waiter',
-				searUrl:'http://localhost:8888/ordersearch',
 				arg:''
 			}
 		},
@@ -34,11 +33,12 @@
 			},
 			waiter: function(){
 				var socket = io.connect('ws://10.3.134.41:8888')
-				socket.emit('waiter',{boolean:'呼叫二师兄',status:true})
-				socket.on('recied',function(){
+				socket.emit('waiter',{status:'呼叫二师兄'})
+				/*socket.on('receive',function(res){
+					console.log(res)
 					this.$message('已呼叫服务员，请稍等');
-				})
-				//this.$message('已呼叫服务员，请稍等');
+				})*/
+				this.$message('已呼叫服务员，请稍等');
 			},
 			classify(){
 				this.$store.dispatch('classify');
@@ -73,7 +73,7 @@
 		        var postData = {startNum: startN, num: num, args: this.arg}
 		        //axios的post请求
 		        var countArr = this.checkStorage()
-		        this.$ajax.post(this.searUrl, qs.stringify(postData) )
+		        this.$ajax.post(this.baseUrl + 'ordersearch', qs.stringify(postData) )
 		        .then(res=>{
 		          var arr = res.data.data;
 		          arr.forEach((item, idx)=>{

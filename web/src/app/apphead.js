@@ -30,7 +30,7 @@ const mutations = {
 		Vue.prototype.sear = formdata;
 		state.search = formdata;
 		console.log(this)
-		/*router.push({name: 'search',params:formdata})*/
+		router.push({name: 'recommend'})
 	},
 	showdone:() => {
 		router.push({name: 'showdone'})
