@@ -1,0 +1,83 @@
+@import url('./common.scss');
+body{
+	padding-bottom:0.8rem;
+}
+.food-main{
+	width: 100%;
+	
+	position: relative;
+		.call{
+			width: 2rem;
+			height: 2rem;
+			position:absolute;
+			border-radius: 50%;
+			left: 25%;
+			top:30%;
+			z-index: 1000;
+			background: white;
+			opacity: 0.8;
+			font-size: 0.12rem;
+			color: red;
+			overflow: hidden;
+			._call{
+				display: inline-block;
+				font-size: 0.2rem;
+				width: 100%;
+				text-align: center;
+				height: 1rem;
+				position: absolute;
+				top:40%;
+			}
+			.btn{
+               color: white;
+               display: inline-block;
+               width: 40%;
+			   text-align: center;
+			   height: 0.25rem;
+			   position: absolute;
+			   top:60%;
+			   left:30%;
+			   font-size: 0.16rem;
+			   line-height: 0.25rem;
+			   background: #005AB5;
+			}
+			img{
+				//position: absolute;
+				height: 2rem;
+				width: 2rem;
+				border-right: 50%;
+
+			}
+		}
+		.box{
+			height: 1rem;
+			color: white;
+			font-size: 3rem;
+			margin-top: 0.15rem;
+
+		.img{
+            float: left;
+			display:inline-block;
+			height: 100%;
+			width: 48%;
+			font-size: 0.5rem;
+			line-height: 1rem;
+			text-align: center;
+
+
+
+		}
+		.font{
+			float: left;
+			display:inline-block;
+			height: 100%;
+			width: 48%;
+			font-size: 0.14rem;
+			line-height: 1rem;
+			text-align: left;
+			
+			
+		}
+	}
+
+}

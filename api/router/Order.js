@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var urlencodeParser = bodyParser.urlencoded({
 	extended: true
 });
-
+console.log(9999999)
 exports.order = function(app){
 	//获取商品信息
 	app.post('/recommend', urlencodeParser, function(request, response) {
