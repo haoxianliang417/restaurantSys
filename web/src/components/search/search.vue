@@ -1,6 +1,7 @@
 <template>
 	<div class="searchSty">
-		<showlist :baseUrl="url" :arg="arg"></showlist>
+		<!-- <showlist :baseUrl="url" :arg="arg"></showlist> -->
+		<button @click="searbtn">搜索</button>
 	</div>
 	
 </template>
@@ -16,13 +17,17 @@ import showlist from '../showList/showList.vue'
 			}
 		},
 		methods:{
-			
+			searbtn(){
+				console.log('搜索',this.sear.searData)
+				this.arg = this.sear.searData
+			}
 		},
 		components:{
 			showlist
 		},
 		created(){
-			this.arg = this.$route.params.searData;
+			console.log(this)
+			//this.arg = this.sear.searData
 			console.log('状态：created')
 		},
 		updated(){
