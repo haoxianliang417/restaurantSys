@@ -107,8 +107,8 @@ module.exports = {
             }
         });        
     },
-    queryBill: function(barcode,callback){
-        connection.query("SELECT * FROM "+table+"",function(err, result){
+    queryBill: function(callback){
+        connection.query("SELECT * FROM bill",function(err, result){
              if (err) {
                  console.log('查询出错！')
             } else {
