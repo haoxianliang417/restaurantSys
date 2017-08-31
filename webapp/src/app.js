@@ -6,6 +6,7 @@ import store from './vuex/store'
 import  ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import axios from 'axios'
+import $ from 'jquery'
 
 
 Vue.use(Vuex);
