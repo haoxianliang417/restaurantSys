@@ -9,7 +9,7 @@
 	export default{
 		data:function(){
 			return {
-				url:this.baseUrl + 'paging',
+				url:this.baseUrl+'paging',
 				arg:''
 			}
 		},
@@ -18,6 +18,7 @@
 		},
 		created(){
 			this.arg = ''
+			console.log(this.baseUrl)
 			console.log('推荐',this.$store.state)
 		}
 	}

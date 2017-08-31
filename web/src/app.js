@@ -7,13 +7,16 @@ import axios from 'axios'
 
 Vue.prototype.baseUrl = 'http://localhost:8888/'
 Vue.prototype.yehua = {}
-var socket = io.connect('ws://10.3.134.41:8888')
+var socket = io.connect('ws://localhost:8888')
 socket.emit('login',{mid:'yehua登录'})
 socket.on('connect',function(){
 	console.log('socket连接成功')
 })
 Vue.use(ElementUI)
+
 Vue.prototype.$ajax = axios
+
+Vue.prototype.storage = window.localStorage
 
 var designWidth = 768, rem2px = 100;
 document.documentElement.style.fontSize =
