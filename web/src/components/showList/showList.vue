@@ -108,24 +108,26 @@ import $ from 'jquery'
         console.log('id值',id)
         this.checkStorage();
         //判断当前的是否存在或相同
-        all:for(var j=0; j < arr.length; j++){
+        var num = 0;
+        for(var j=0; j < arr.length; j++){
           if(arr[j].menuId == id){
             arr[j].count  = Number(arr[j].count) + 1
             if(this.curStorage.length > 0){
               for(var i=0;i < this.curStorage.length; i++){
-                console.log(this.curStorage[i].menuId)
-                console.log(this.curStorage)
+                num++
+                console.log('num',num)
                 if(this.curStorage[i].menuId == id){
                   this.curStorage[i].count = arr[j].count
-                  break all
                 }else{
-                  this.curStorage.push(arr[j])
-                  break all
+                  if(num == this.curStorage.length){
+                    console.log('循环次数',num)
+                    num = 0
+                    this.curStorage.push(arr[j])
+                  }
                 }
               }
             }else{
                 this.curStorage.push(arr[j])
-                break all
             }
           }
         }

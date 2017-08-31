@@ -103,7 +103,7 @@
 								this.$message('下单失败')
 							}
 						})
-						var ws = io.connect('ws://localhost:8888')
+						var ws = io.connect(this.wsUrl)
 						ws.emit('data',{orderMenuNum:8, detail:newArr, state:0})
 						ws.on('hehe',function(res){
 							console.log(res)

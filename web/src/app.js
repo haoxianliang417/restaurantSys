@@ -6,8 +6,9 @@ import App from './App.vue'
 import axios from 'axios'
 
 Vue.prototype.baseUrl = 'http://localhost:8888/'
+Vue.prototype.wsUrl = 'ws://localhost:8888/'
 Vue.prototype.yehua = {}
-var socket = io.connect('ws://localhost:8888')
+var socket = io.connect('ws://localhost:8888/')
 socket.emit('login',{mid:'yehua登录'})
 socket.on('connect',function(){
 	console.log('socket连接成功')

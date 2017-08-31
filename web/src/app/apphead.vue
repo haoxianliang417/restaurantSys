@@ -31,7 +31,7 @@
 				this.$store.dispatch('dailyspecial');
 			},
 			waiter: function(){
-				var socket = io.connect('ws://localhost:8888')
+				var socket = io.connect(this.wsUrl)
 				socket.emit('waiter',{status:'呼叫二师兄'})
 				/*socket.on('receive',function(res){
 					console.log(res)
