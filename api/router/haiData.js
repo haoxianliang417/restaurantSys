@@ -21,7 +21,13 @@ exports.haiData = function(app){
 		db.haiSearch(request.body.database,request.body.key,request.body.keyword,function(res){
 			response.send({status:true, msg:'获取信息123', data:res});
 		})
-	})
+	}),
+	//获取订单信息
+	app.post('/find',urlencodeParser,function(request,response){
+		db.hquery(request.body.database,'*',function(res){
+			response.send({status:true, msg:'获取信息', data:res});
+		})
+	}),
 	//老高传数据
 	app.post('/waiter',urlencodeParser,function(request,response){
 		console.log(request.body);

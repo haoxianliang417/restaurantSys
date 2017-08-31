@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <hai-head></hai-head>
     <div class="food-main">
     <div class="call" v-show = 'show'>
@@ -77,6 +76,7 @@
 		</el-row>
          
 	</div>
+	
 	<hai-foot></hai-foot>
   </div> 
 </template>
@@ -86,8 +86,8 @@
 	import footer from './footer/footer.vue'
 	import './food.scss'
     import Vue from 'vue'
+    import $ from 'jquery'
 	export default {
-          
 		components: {
 			'hai-head':header,
 			'hai-foot':footer
@@ -102,7 +102,12 @@
 		},
 		methods: {
 			hidde(){
-				this.show = false;1
+				this.show = false;
+			},
+			btn(){
+				console.log(123)
+	   //          var sorket1 = io.connect("ws://localhost:1703");
+				// sorket1.emit('login','hai');
 			}
 		},
 		created(){
@@ -113,7 +118,7 @@
 				seat: '8号座位订单',
 				serving: '1'
 			};
-            
+            $()
             Vue.prototype.socket = io.connect('ws://localhost:8888');
 			Vue.prototype.socket.emit('login',{wid:'hai'});
 			Vue.prototype.socket.on('connect',function(){
@@ -135,13 +140,15 @@
 			
 
 
-			//var sorketw = io.connect("ws://localhost:1703");
-			//sorket1.emit('login','hai');
-			// sorketw.on('call',function(show){
-			// 	self.show = Boolean(show);
+			// var sorket1 = io.connect("ws://localhost:1703");
+			// sorket1.emit('login','hai');
+			// sorket1.on('test',function(data){
+			// 	console.log(data);
+			// })
+			// sorket1.on('call',function(show){
+			// 	//self.show = Boolean(show);
 			// 	console.log(self.show)
-			// 	sorketw.emit('sure','服务员正在路上')
-			// 	self.obj.name = 'aaaaa';
+			// 	sorket1.emit('sure','服务员正在路上')
 			// })
 		}
 		

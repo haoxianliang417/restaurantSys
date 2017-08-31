@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 //import login from '../component/login/login'
 import comment from '../component/comment/comment.js'
 import table from '../component/table/table.js'
+import reminder from '../component/reminder/reminder.js'
 
 Vue.use(Vuex)
 
@@ -11,7 +12,8 @@ export default new Vuex.Store({
 	modules:{
 		//存放上面声明的js文件
 		comment,
-        table
+        table,
+        reminder
 	}
 	
 })
