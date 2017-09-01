@@ -50,7 +50,8 @@
       </template>
     </el-table-column>
   </el-table>
-  <div style="margin-top: 20px">
+  <div style="margin-top: 20px" class="orderfoot">
+  	<p><span>总计：</span><span class='showprice'>{{allTotal}}</span></p>
     <el-button type="primary" @click="sendBill">下单</el-button>
   </div>
   <el-dialog
@@ -85,7 +86,8 @@
 				showData: [],
 				dialogVisible:false,
 				orderVisible:false,
-				orderList:[]
+				orderList:[],
+				allTotal:30
 			}
 		},
 		methods:{
@@ -94,7 +96,7 @@
 				this.$confirm('确认下单吗？')
 		          .then(_ => {
 		          		var sendData = this.getStorage();
-						var sendObj = {orderMenuNum:8, detail:JSON.stringify(sendData), state:0}
+						var sendObj = {orderMenuNum:8, detail:JSON.stringify(sendData), allTotal:Number(this.allTotal), state:0}
 						this.$ajax.post(this.url, qs.stringify(sendObj))
 						.then(res=>{
 							if(res.status){
@@ -103,9 +105,10 @@
 								this.$message('下单失败')
 							}
 						})
+						console.log('wsUrl',this.wsUrl)
 						var ws = io.connect(this.wsUrl)
-						ws.emit('data',{orderMenuNum:8, detail:newArr, state:0})
-						ws.on('hehe',function(res){
+						ws.emit('ordersend','已下单')
+						ws.on('order',function(res){
 							console.log(res)
 						})
 		          })
@@ -114,9 +117,11 @@
 			getStorage(){
 				var data = JSON.parse(this.storage.getItem('billDetail'));
 				//过滤count为0的
-				console.log('清单',data)
+				//console.log('清单',data)
+				this.allTotal = 0
 				var newArr = data.filter((item, idx) => {
 					item.smalltotal = item.menuPrice * item.count;
+					this.allTotal += item.smalltotal
 					return item.count != 0
 				})
 				this.showData = newArr;
@@ -194,7 +199,6 @@
 		},
 		created(){
 			var arr = this.getStorage();
-			console.log('账单',arr)
 		}
 	}
 </script>
@@ -213,4 +217,9 @@
 	.addBtn{overflow:hidden;
 		.cell{float:right;margin:0;padding:0}
 	}
+	.orderfoot{display:flex;justify-content:space-between;
+		p{font-size:0.2rem;}
+	}
+	.showprice:before{content:'￥';}
+	.showprice:after{content:'.00';}
 </style>

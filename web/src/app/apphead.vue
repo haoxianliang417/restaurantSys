@@ -8,6 +8,7 @@
       	<el-button slot="append" icon="search" @click="searbtn"></el-button>
     </el-input>
     <el-button class="billStatus" @click="steps">当前账单状态</el-button>
+    <el-button type="success">8号桌</el-button>
 </el-row>
 </template>
 
@@ -16,7 +17,6 @@
 	var storage = window.localStorage;
 	export default {
 		data: () => {
-			console.log(this)
 			return{
 				url: this.baseUrl + 'waiter',
 				arg:''
@@ -63,7 +63,6 @@
 		          if(curStorage.length > 0){
 		            curStorage = JSON.parse(curStorage);
 		          }
-		          //console.log('curStorage',curStorage)
 		          return curStorage
 		      },
 			 ajaxData(start, num){
@@ -93,5 +92,5 @@
 </script>
 
 <style lang="scss">
-	.billStatus{margin-left:0.15rem}
+	.billStatus{margin-left:0.1rem}
 </style>

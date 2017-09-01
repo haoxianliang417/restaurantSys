@@ -18,8 +18,6 @@
 		},
 		created(){
 			this.arg = ''
-			console.log(this.baseUrl)
-			console.log('推荐',this.$store.state)
 		}
 	}
 </script>

@@ -44,7 +44,7 @@
   .height{height:100%}
   .appleft{height:100%;background:rgba(0,0,0,.5)}
   .btn{display:flex;
-    .search-btn{width:30%;margin-left:0.15rem}
+    .search-btn{width:30%;margin-left:0.08rem}
   }
   .mainGood{padding-right:0.226rem;}
 </style>

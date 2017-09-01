@@ -52,13 +52,14 @@
         </el-carousel-item>
       </el-carousel>
     </el-dialog>
+
   </div>
 </template>
 
 <script>
 import qs from 'qs'
 import $ from 'jquery'
-
+import { Loading } from 'element-ui';
 	export default{
 		data (){
 			return{
@@ -80,7 +81,6 @@ import $ from 'jquery'
         this.dialogVisible = true;
         this.carouselData = this.$store.state.apphead.search
         this.carouselIndex = Number($(event.target).closest('.single').attr('data-carouselIndex'))
-        console.log('走马灯id',this.carouselIndex)
       },
       //获取节点相关值
       getEle(event){
@@ -105,7 +105,6 @@ import $ from 'jquery'
       },
       addFunction(id){
         var arr = this.$store.state.apphead.search;
-        console.log('id值',id)
         this.checkStorage();
         //判断当前的是否存在或相同
         var num = 0;
@@ -115,12 +114,12 @@ import $ from 'jquery'
             if(this.curStorage.length > 0){
               for(var i=0;i < this.curStorage.length; i++){
                 num++
-                console.log('num',num)
                 if(this.curStorage[i].menuId == id){
                   this.curStorage[i].count = arr[j].count
+                  this.storageFun()
+                  return 
                 }else{
                   if(num == this.curStorage.length){
-                    console.log('循环次数',num)
                     num = 0
                     this.curStorage.push(arr[j])
                   }
@@ -189,10 +188,14 @@ import $ from 'jquery'
         var startN = (start-1)*num;
         var postData = {startNum: startN, num: num, args: this.arg}
         var countArr = this.curStorage
-        console.log('countArr',countArr)
+        //loading加载条
+        var loadingInstance = Loading.service({text:'拼命加载中...',target:document.querySelector('.mainGood')});
         //axios的post请求
         this.$ajax.post(this.baseUrl, qs.stringify(postData) )
         .then(res=>{
+           setTimeout(() => {
+            loadingInstance.close();
+          }, 1000);
           var arr = res.data.data
           //添加已点的菜的数量********************************
           arr.forEach((item, idx)=>{

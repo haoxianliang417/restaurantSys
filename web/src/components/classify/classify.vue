@@ -1,19 +1,19 @@
 <template>
 <div class="classifyStyle">
   <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="能量荤配" name="first">
+    <el-tab-pane label="能量荤配" name="first" data-class="meat">
       <showlist :baseUrl="url"></showlist>
     </el-tab-pane>
-    <el-tab-pane label="田园时蔬" name="second">
+    <el-tab-pane label="田园时蔬" name="second" data-class="vegetables">
       <showlist :baseUrl="url"></showlist>
     </el-tab-pane>
-    <el-tab-pane label="粗食辅助" name="third">
+    <el-tab-pane label="粗食辅助" name="third" data-class="coarsefood">
       <showlist :baseUrl="url"></showlist>
     </el-tab-pane>
-    <el-tab-pane label="举杯豪情" name="fourth">
+    <el-tab-pane label="举杯豪情" name="fourth" data-class="酒水  ">
       <showlist :baseUrl="url"></showlist>
     </el-tab-pane>
-    <el-tab-pane label="甜点" name="five">
+    <el-tab-pane label="甜点" name="five" data-id>
       <showlist :baseUrl="url"></showlist>
     </el-tab-pane>
     <el-tab-pane label="果盘" name="six">
@@ -34,7 +34,7 @@ import showlist from '../showList/showList.vue'
     },
     methods: {
       handleClick(tab, event) {
-        //console.log(tab, event);
+        
       }
     },
     components: {

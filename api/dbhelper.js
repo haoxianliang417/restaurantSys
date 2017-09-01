@@ -191,8 +191,6 @@ module.exports = {
         }
         item = item.slice(0,-1);
         str = str.slice(0,-1);
-        console.log('dbhelper',item)
-        console.log('dbhelper123',str);
         var  addSql = 'INSERT INTO' + ' ' + table + '(' + item + ') VALUES('+ str +')';
         connection.query(addSql, arr, function (err, result) {
             if(!err){
