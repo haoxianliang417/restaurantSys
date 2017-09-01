@@ -85,7 +85,9 @@
 		    	.then(function(res){
 		    		
 		    	}.bind(this))
-
+		    	.catch(function(err){
+			        console.log(err);
+			    })
 		    	
 		    },
 		}

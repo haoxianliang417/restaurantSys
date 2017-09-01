@@ -4,7 +4,7 @@
 		<div class="main-reminder">
 			<div>
 			    <div class="hai-seat">
-				    <span class="sp1">1号座位发起催单</span>
+				    <span class="sp1"><span class="num">{{this.$store.state.reminder.reminde.orderMenuNum}}</span>号座位发起催单</span>
 				    <span class="sp2" @click='replay'>回复</span>
 			    </div>
 			    <div class="replay" v-if = 'show'>
@@ -15,16 +15,14 @@
 					<el-collapse-item title="订单详情" name="1">
 					    <div class="hai-box">
 					       <div class="hai-cai">已点菜单</div>
-	                       <div class="hai-cais">
-	                         <span><img src='../../assets/img/1.jpg' /></span>
-	                         <span class="name">红烧鱼</span>
-	                         <span class="num">x2</span>
-	                       </div>
-	                       	 <div class="hai-cais">
-	                         <span><img src='../../assets/img/1.jpg' /></span>
-	                         <span class="name">红烧鱼</span>
-	                         <span class="num">x2</span>
-	                       </div>
+
+                            <div class="hai-cais" v-for="(val,key) in JSON.parse(this.$store.state.reminder.reminde.detail)" :key='key'>
+                                <span>
+                                  <img :src="'src/assets/img/'+val.index+'.jpg'" />
+                                </span>   
+                            	<span class="name">{{val.menuName}}</span>
+                            	<span class="num">x{{val.count}}</span>
+                            </div>
                           
 						</div>
 
@@ -65,6 +63,10 @@
 	    	send(){
 	    		this.show = false ;
 	    	}
+	    },
+	    beforeMount(){
+	    	   this.$store.dispatch('reminder');
+	    	  
 	    }  
     }
 </script>

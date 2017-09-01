@@ -50,7 +50,7 @@ const actions = {
 		
 		axios.get( Vue.prototype.hm + 'getFood?menu=' + state.menu)
 			.then(function(res){
-				console.log(res);
+				console.log('123请求到数据',res);
 				let data = res.data.munuStyle;
 				
 				state.styleNum = data.length;
@@ -77,6 +77,7 @@ const actions = {
 				store.commit('getFoodMenu',tableData)
 				
 			}.bind(this))
+			
 	},
 	//模糊搜索
 	searchFood: function(store,searchData){
@@ -106,18 +107,23 @@ const actions = {
 					store.commit('searchFood',searchR);
 					
 				}.bind(this))
-
+				.catch(function(err){
+			        console.log(err);
+			    })
 		
 	},
 	//菜系
 	getFoodStyle: function(store,data){
-		axios.post( Vue.prototype.hm  +  'getFoodStyle')
+		axios.get( Vue.prototype.hm  +  'getFoodStyle')
 			.then(function(res){
 				var styleData;		
 				styleData = res.data.foodStyle;
 
 				store.commit('getFoodStyle',styleData);
 			}.bind(this))
+			.catch(function(err){
+		        console.log(err);
+		    })
 	}
 	
 }
@@ -136,7 +142,6 @@ const mutations = {
 		
 	},
 	getFoodMenu: function(state,data){
-		
 		
 		state.tableData2 = data;
 	},

@@ -2,7 +2,9 @@ import {hai} from '../food/common.js'
 import axios from 'axios'
 import qs from 'qs'
 const state = {
-     tables: []
+     tables: [],
+     form: [],
+     state: []
 }
 const actions = {
   //初始数据请求
@@ -18,19 +20,28 @@ const actions = {
 	},
   //类型请求数据
   form:function(event,keyword){
-     console.log('哈哈',keyword)
-     //this.$st.commit(a)
-     event.commit('a')
+     event.commit('_form',keyword)
   },
   //状态请求数据
-  state:function(evevt,keyword){
-       console.log('haha',keyword)
+  state:function(event,keyword){
+     event.commit('_state',keyword)
   }
 
 }
 const mutations = {
-      a:function(){
-        console.log('aaaaa')
+      _form(data,keyword){
+         axios.post(hai+'select',qs.stringify({database:'tables',key:'persons',keyword:keyword}))
+         .then((res)=>{
+            console.log(res);
+            state.tables = res.data;
+         })
+      },
+      _state(data,keyword){
+         axios.post(hai+'select',qs.stringify({database:'tables',key:'state',keyword:keyword}))
+         .then((res)=>{
+            console.log(res);
+            state.tables = res.data;
+         })
       }
 }
 export default  {

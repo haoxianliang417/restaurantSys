@@ -22,10 +22,6 @@
         <el-menu-item index="1-4-1">选项1</el-menu-item>
       </el-submenu>
     </el-submenu>
-    <el-menu-item index="2">
-      <i class="el-icon-edit"></i>
-      <span slot="title">已点菜</span>
-    </el-menu-item>
     <el-menu-item index="2" @click="order">
       <i class="fa fa-arrow-down" aria-hidden="true"></i>
       <span slot="title">下单</span>
@@ -53,7 +49,7 @@
       },
       order(){
         this.$store.dispatch('order');
-      }
+      },
     }
   }
 </script>

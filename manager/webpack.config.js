@@ -2,13 +2,13 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './src/app.js',  //唯一入口文件
+  entry: './src/app.js',
   output: {
-    path: path.resolve(__dirname, './dist'), //打包的 js 存放目录，也就是 npm build(webpack) 会生成一个 js 文件
-    publicPath: '/dist/', //npm start 虚拟路径
-    filename: 'build.js'  //生成的JS文件
+    path: path.resolve(__dirname, './dist'),
+    publicPath: '/dist/',
+    filename: 'build.js'
   },
-    module: {
+  module: {
     rules: [
       {
         test: /\.vue$/,
@@ -16,7 +16,7 @@ module.exports = {
         options: {
           loaders: {
             'scss': 'vue-style-loader!css-loader!sass-loader',
-           
+            'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
           }
         }
       },
@@ -48,6 +48,15 @@ module.exports = {
             }
           }
         }]
+      },
+      {   test: /\.css$/, 
+          exclude: /node_modules/,
+          loader: 'style-loader!css-loader?sourceMap' 
+      },
+      { 
+          test: /\.(woff|svg|eot|ttf)\??.*$/,
+          exclude: /node_modules/,
+          loader: 'url-loader?limit=80000&name=fonts/[name].[md5.hash.hex:7].[ext]'
       },
       {
         test: /\.css$/,
@@ -103,6 +112,10 @@ if (process.env.NODE_ENV === 'production') {
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
-    })
+    }),
+    new webpack.ProvidePlugin({
+       jQuery: "jquery",
+       $: "jquery"
+    }) 
   ])
 }

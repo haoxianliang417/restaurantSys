@@ -164,7 +164,7 @@
 			
 			getFoodMenu: function(menu) {
 				this.style = menu;
-				
+				console.log('这是暑假',menu);
 
 				this.$store.dispatch('getFoodMenu',menu);
 
@@ -194,6 +194,9 @@
 					.then(function(res) {
 						console.log(res)
 					}.bind(this))
+					.catch(function(err){
+				        console.log(err);
+				    })
 				console.log(this);
 				this.getFoodMenu(this.style);
 			},
@@ -201,7 +204,6 @@
 			searchFood: function(){
 				
 				this.$store.dispatch('searchFood',this.input);
-
 			},
 
 
@@ -210,13 +212,7 @@
 		created: function() {
 
 			console.log(this.$store.state.manage)
-			// 请求菜系
-			// axios.post(this.hm +  'getFoodStyle')
-			// .then(function(res){
-				
-				
-			// 	this.styleData = res.data.foodStyle;
-			// }.bind(this))
+			
 			this.$store.dispatch('getFoodStyle');
 			
 		},

@@ -7,7 +7,7 @@ var urlencodeParser = bodyParser.urlencoded({
 
 exports.food = function(app){
 	//获取菜系
-	app.post('/getFoodStyle',urlencodeParser,function(request,response){
+	app.get('/getFoodStyle',urlencodeParser,function(request,response){
 		db.hmQuery('style',function(res){
 			if(res){
 				response.send({status:true, msg:'成功获取菜系信息', foodStyle:res});
@@ -33,7 +33,7 @@ exports.food = function(app){
 		var key = Object.keys(data).join(',');
         var val = Object.values(data).join('');
 
-		db.haiSearch('menu',val,function(res){
+		db.haiSearch('menu','style',val,function(res){
 
 			if(res){
 				response.send({status:true, msg: '成功获取菜单信息',munuStyle:res})

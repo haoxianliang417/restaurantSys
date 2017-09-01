@@ -24,6 +24,16 @@ module.exports = {
         
         });
     },
+    hquery: function(table,data,callback) {
+        connection.query("SELECT "+' '+data+' '+ "FROM" +' '+table, function(err, result) {
+            if (err) {
+                console.log(err)
+            } else {
+                callback(result);
+            } 
+        
+        });
+    },
 
     
     hmQuery: function(table,callback){
@@ -38,8 +48,10 @@ module.exports = {
 
 
     //搜索
-    haiSearch: function(table,keyword,callback){
-        var searchSql = "SELECT * FROM" +' '+table +' '+" where"+ ' '+'style'+' '+ "LIKE"+' '+"'%"+ keyword +"%'";
+
+    haiSearch: function(table,key,keyword,callback){
+       // var searchSql = "SELECT * FROM" +' '+table +' '+" where"+ ' '+'goodsPurchaseId'+' '+ "LIKE"+' '+"'%"+ keyword +"%'";
+          var searchSql = "SELECT * FROM" +' '+table +' '+" where"+ ' '+key+' '+ "LIKE"+' '+"'%"+ keyword +"%'";
         connection.query(searchSql,function(err,result){
             if(err) {
                 console.log(err);
@@ -107,8 +119,8 @@ module.exports = {
             }
         });        
     },
-    queryBill: function(barcode,callback){
-        connection.query("SELECT * FROM "+table+"",function(err, result){
+    queryBill: function(callback){
+        connection.query("SELECT * FROM bill",function(err, result){
              if (err) {
                  console.log('查询出错！')
             } else {

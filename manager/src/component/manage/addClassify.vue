@@ -59,6 +59,9 @@
 					console.log(res);
 					this.$store.dispatch('getFoodStyle');
 				}.bind(this))
+				.catch(function(err){
+			        console.log(err);
+			    })
 			},
 		}
 	}
