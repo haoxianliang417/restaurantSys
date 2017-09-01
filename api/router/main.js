@@ -10,7 +10,9 @@ var order = require('./Order.js')
 exports.main = function(express) {
 
 var app = express();
-app.use(express.static(path.join(path.resolve(__dirname, '../../'), '/')), function(req, res, next) {
+
+app.use(express.static(path.join(path.resolve(__dirname, '../../'), '/')), 
+    function(req, res, next) {
 
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -31,49 +33,13 @@ app.use(express.static(path.join(path.resolve(__dirname, '../../'), '/')), funct
 
 
 
-app.get('/', function(request, response) {
-    response.status(200).send('Home Page');
-})
-var server =require('http').createServer(app);
-var io = require('socket.io')(server);
-// io.of('kitchen').on('connection',function(socket){
-
-//     console.log('ok');
-//     //console.log(this);
-//     socket.emit('login','hehe');
-//     socket.on('click',function(){
-//     })
-// })
-var waiter = [];
-io.on('connection',function(socket){
-    //console.log(socket);
-    //socket.emit('login','ok');
-    //console.log(socket.id)
-    socket.emit('login','hehe');
-    socket.on('login',function(obj){
-        //console.log(obj.uid);
-        console.log(obj)
-        console.log(obj.wid)
-        if(obj.wid!= undefined){
-            obj.uid=socket.id;
-            waiter.push(obj);
-            console.log(waiter)
-            console.log(waiter[0].uid);
-        }
-       
-    })
-    socket.on('click',function(){
-    console.log(io.sockets.sockets);
-    io.sockets.sockets[waiter[0].uid].emit('hehe', '3');
-    })
-    socket.on('data',function(obj){
-        console.log(obj);
-        socket.emit('hehe','ok');
-    })
-
-
 food.food(app);
+
 goodsData.goodsData(app)
 order.order(app)
-server.listen(8888);
+app.get('/', function(request, response) {
+
+    response.send('Home Page');
+})
+app.listen(8888);
 }

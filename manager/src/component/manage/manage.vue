@@ -12,14 +12,19 @@
 
 		<div class="main">
 			<div class="aside">
-				<div class="plusClassfy">
-					<el-button type="primary"><i class="el-icon-plus"></i>新增分类</el-button>
-				</div>
+				<addClassify></addClassify>
 				<div class="foods_list">
 					<h3>全部菜系</h3>
 					
 					<ul class="food_style">
-						<li v-for= "(val, index) in styleData" index="index" @click= "getFoodMenu(val.styleName)">{{index+1}}、{{val.styleName}}</li>
+						<li v-for= "(val, index) in $store.state.manage.styleData" index="index" @click= "getFoodMenu(val.styleName)">{{index+1}}、{{val.styleName}}
+
+						<div class="editBox">
+							<el-button type="text">编辑</el-button>
+							<el-button type="text">删除</el-button>
+						</div>
+
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -37,50 +42,15 @@
 						
 						<!--                         新增菜单子组件             -->
 						<addChild></addChild>
+						<!--                         编辑菜单组件               -->
+						<editChild></editChild>
 
-						<p @click = "editFormVisible = true"><i class="el-icon-circle-check"></i>编辑菜品</p>
+						
 						<p @click="deleteVisible = true"><i class="el-icon-circle-close"></i>删除菜品</p>
 						<p><i class="el-icon-information"></i>停用菜品</p>
 						<p><i class="el-icon-plus i"></i>新增套餐</p>
 
-						
-						<el-dialog title="编辑菜单" :visible.sync="editFormVisible">
-								<el-form :model="form">
-									<el-form-item label="菜品名称" :label-width="formLabelWidth">
-										<el-input v-model="edit.name" auto-complete="off"></el-input>
-									</el-form-item>
-									<el-form-item label="菜品分类" :label-width="formLabelWidth">
-										<el-select v-model="edit.region1" placeholder="请选择分类">
-											<el-option label="粤菜" value="粤菜"></el-option>
-											<el-option label="川菜" value="川菜"></el-option>
-
-										</el-select>
-									</el-form-item>
-									<el-form-item label="菜品菜系" :label-width="formLabelWidth">
-										<el-select v-model="edit.region2" placeholder="请选择分类">
-											<el-option label="精致冷碟" value="精致冷碟"></el-option>
-											<el-option label="精选热菜" value="精选热菜"></el-option>
-											<el-option label="特色小炒" value="特色小炒"></el-option>
-											<el-option label="甜品美食" value="甜品美食"></el-option>
-											<el-option label="精品点心" value="精品点心"></el-option>
-										</el-select>
-									</el-form-item>
-									<el-form-item label="售价" :label-width="formLabelWidth">
-										<el-input v-model="edit.price" auto-complete="off"></el-input>
-									</el-form-item>
-									<el-form-item label="会员价" :label-width="formLabelWidth">
-										<el-input v-model="edit.vipPrice" auto-complete="off"></el-input>
-									</el-form-item>
-									<el-form-item label="详情" :label-width="formLabelWidth">
-										<el-input type="textarea" v-model="edit.desc"></el-input>
-									</el-form-item>
-								</el-form>
-								<div slot="footer" class="dialog-footer">
-									<el-button @click="editFormVisible = false">取 消</el-button>
-									<el-button type="primary" @click="editFood">确 定</el-button>
-								</div>
-						</el-dialog>
-						
+										
 						<el-dialog title="提示" :visible.sync="deleteVisible" size="tiny" :before-close="handleClose">
 								<span>确定要忍心抛弃我吗</span>
 								<span slot="footer" class="dialog-footer">
@@ -94,18 +64,18 @@
 					
 					<div style=" margin: 10px; width:500px;">
 					  <el-input placeholder="请输入内容" v-model="input">
-					    <!-- <el-select v-model="select" slot="prepend" placeholder="请选择">
+					    <el-select v-model="select" slot="prepend" placeholder="请选择">
 					      <el-option label="菜品名" value="1"></el-option>
 					      <el-option label="id名" value="2"></el-option>
 					      
-					    </el-select> -->
+					    </el-select>
 					    <el-button slot="append" icon="search" @click = "searchFood"></el-button>
 					  </el-input>
 					</div>
 
 
 					<div class="style_munu" @click="getId">
-						<el-table :data="tableData2" style="width: 100%" ref='idx' highlight-current-row>
+						<el-table :data="$store.state.manage.tableData2" style="width: 100%" ref='idx' highlight-current-row>
 							<el-table-column prop="num" label="序号" width="80">
 							</el-table-column>
 							<el-table-column prop="idx" label="编号ID" width="80" className="foodId">
@@ -147,60 +117,34 @@
 	import 'element-ui/lib/theme-default/index.css';
 	import $ from 'jquery';
 
+	import manageAction from './manage';
+
 	import addChild from './addChild.vue';
+	import editChild from './editChild.vue';
+	import addClassify from './addClassify.vue'
 
 	import axios from 'axios';
 	Vue.prototype.$http = axios;
 
 	Vue.use(ElementUI);
 
-	
-
 
 	export default{
 
-		data: () => {
+		data: function() {
 			return{
 				styleData: [],
-				tableData2: [],
-				style: '精致冷碟',
-				styleNum: '',
+				style: '',
+				fristMenu: '',
+				styleNum: this.$store.state.manage.styleNum,
 				foodId: '',
-				
 				select: '',
 				input: '',
 				deleteVisible: false,
 		        dialogFormVisible: false,
-		        editFormVisible: false,
-		        form: {
-		          name: '',
-		          region1: '',
-		          region2: '',
-		          price: '',
-		          vipPrice: '',
-		          date1: '',
-		          date2: '',
-		          delivery: false,
-		          type: [],
-		          resource: '',
-		          desc: ''
-		        },
-		        edit: {
-		        	name: '',
-			        region1: '',
-			        region2: '',
-			        price: '',
-			        vipPrice: '',
-			        date1: '',
-			        date2: '',
-			        delivery: false,
-			        type: [],
-			        resource: '',
-			        desc: ''
-		        },
-		        formLabelWidth: '120px'
 			}
 		},
+		
 		methods: {
 
 			handleClose(done) {
@@ -212,38 +156,18 @@
 			},
 			
 			btn: function() {
-				console.log('测试');
 				console.log(this.$store);
-				console.log(this.$store.manage);
+				console.log('测试',this.tableData2);
+				
 			},
+			
+			
 			getFoodMenu: function(menu) {
 				this.style = menu;
-				axios.get('http://localhost:8888/getFood?menu=' + menu)
-				.then(function(res){
-							
-					let data = res.data.munuStyle;
-					console.log(data);
-					this.styleNum = data.length;
-					
-					this.tableData2 = [];
-					for(var i = 0 ; i < data.length; i ++){
+				
 
-						this.tableData2[i] = {
-						  num: i+1,
-						  idx: data[i].menuId,
-						  name: data[i].menuName,
-				          style: data[i].style,
-				          detail : data[i].detail,
-				          classify: data[i].type,
-				          price: data[i].menuPrice,
-				          vipPrice: data[i].vipPrice,
-				          ban : '-',
-				          blockUp: '-'
-						};
-						
-					}
-					
-				}.bind(this))
+				this.$store.dispatch('getFoodMenu',menu);
+
 			},
 			tableRowClassName: (row, index) => {
 		        if (index === 1) {
@@ -254,35 +178,19 @@
 		        return '';
 		    },
 		  	    
-		   
+		   	// 获取当前的ID
 		    getId: function(event){
-		    	
-		    	this.foodId = $(event.target).parents('tr').find('.foodId')[0].innerText;
-				this.edit.name = $(event.target).parents('tr').find('.foodName')[0].innerText;
-				this.edit.region2 = $(event.target).parents('tr').find('.foodStyle')[0].innerText;
-				this.edit.region1 = $(event.target).parents('tr').find('.foodType')[0].innerText;
-				this.edit.price = $(event.target).parents('tr').find('.foodPrice')[0].innerText;
-				this.edit.vipPrice = $(event.target).parents('tr').find('.foodVipPrice')[0].innerText;
-				this.edit.desc = $(event.target).parents('tr').find('.detail')[0].innerText;
+		    			    	
+		    	this.$store.dispatch('getId',event);
 		    },
-		    //编辑菜单
-			editFood: function() {
-				this.editFormVisible = false;
-
-				let str = `menuName=${this.edit.name}&type=${this.edit.region1}&style=${this.edit.region2}&menuPrice=${this.edit.price}&vipPrice=${this.edit.vipPrice}&detail=${this.edit.desc}&menuId=${this.foodId}`;
-				console.log(str);
-				axios.get('http://localhost:8888/editFood?' + str)
-					.then(function(res) {
-						console.log(res)
-					}.bind(this))
-
-				this.getFoodMenu(this.style);
-			},
+		    
 			//删除
 			deleteFood: function() {
 				this.deleteVisible = false;
-				console.log(this.foodId);
-				axios.get('http://localhost:8888/deleteFood?menuId=' + this.foodId)
+				
+				
+				var foodId = this.$store.state.manage.foodId;
+				axios.get( this.hm +  'deleteFood?menuId=' + foodId)
 					.then(function(res) {
 						console.log(res)
 					}.bind(this))
@@ -291,72 +199,32 @@
 			},
 			//搜索菜品
 			searchFood: function(){
-				console.log(this);
-				axios.get('http://localhost:8888/searchFood?menuName=' + this.input)
-					.then(function(res){
-						this.tableData2 = [];
-						var data = res.data.searchFood;
-						console.log(data);
-						for(var i = 0 ; i < data.length; i ++){
-
-							this.tableData2[i] = {
-							  num: i+1,
-							  idx: data[i].menuId,
-							  name: data[i].menuName,
-					          style: data[i].style,
-					          detail : data[i].detail,
-					          classify: data[i].type,
-					          price: data[i].menuPrice,
-					          vipPrice: data[i].vipPrice,
-					          ban : '-',
-					          blockUp: '-'
-							};
-						
-						}
-					}.bind(this))
-
+				
+				this.$store.dispatch('searchFood',this.input);
 
 			},
+
+
+
  		},
 		created: function() {
+
+			console.log(this.$store.state.manage)
 			// 请求菜系
-			axios.post('http://localhost:8888/getFoodStyle')
-			.then(function(res){
-				this.styleData = res.data.foodStyle;
-			}.bind(this))
-
-			//刚进来页面，请求精致冷碟的菜单
-			axios.get( 'http://localhost:8888/getFood?menu=' + '精致冷碟')
-				.then(function(res){
-									
-					let data = res.data.munuStyle;
-					this.styleNum = data.length;
-					// let meneObj;
-					this.tableData2 = [];
-					console.log(data)
-					for(var i = 0 ; i < data.length; i ++){
-
-						this.tableData2[i] = {
-						  num: i+1,
-						  idx:  data[i].menuId,
-						  name: data[i].menuName,
-				          style: data[i].style,
-				          detail : data[i].detail,
-				          classify: data[i].type,
-				         price: data[i].menuPrice,
-				          vipPrice: data[i].vipPrice,
-				          ban : '-',
-				          blockUp: '-'
-						};
-						
-					}
-					console.log(this.$refs)
-				}.bind(this));
+			// axios.post(this.hm +  'getFoodStyle')
+			// .then(function(res){
+				
+				
+			// 	this.styleData = res.data.foodStyle;
+			// }.bind(this))
+			this.$store.dispatch('getFoodStyle');
 			
 		},
 
 		components: {
 			addChild,
+			editChild,
+			addClassify,
 		}
 		
 	}

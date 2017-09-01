@@ -15,6 +15,15 @@ exports.food = function(app){
 		})
 	});
 	
+	//添加分类
+	app.post('/addClassify',urlencodeParser,function(request,response){
+		console.log('request',request.body);
+		var data = request.body;
+		db.hmInsert('style',data,function(res){
+			response.send({status: true, msg: '添加菜系', addClassify: res});
+		})
+		
+	})
 	
 
 	//查询
@@ -43,11 +52,13 @@ exports.food = function(app){
 	});
 
 	//编辑菜单
-	app.get('/editFood',function(request,response){
+	app.get('/editFood',urlencodeParser,function(request,response){
+		
 		var data = request.query;
 		console.log('这是data',data);
+		
 		db.hmUpdate('menu',data,function(res){
-			response.send({status:true,mag:'编辑菜品',addFood:res});
+			response.send({status:true,mag:'编辑菜品',editFood:res});
 		})
 	});
 
@@ -70,5 +81,8 @@ exports.food = function(app){
 			response.send({status:true, msg:'根据name模糊搜索', searchFood:res});
 		})
 	});
+
+	
+	
 	
 }
