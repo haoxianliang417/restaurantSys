@@ -7,6 +7,8 @@ import manage from './component/manage/manage.vue';
 
 import store from './vuex/store';
 
+Vue.prototype.hm = 'http://localhost:8888/';
+
 new Vue({
   el: '#app',
   store,

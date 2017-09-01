@@ -83,8 +83,12 @@
 		    	
 		    	axios.get('http://localhost:8888/addFood?' + str)
 		    	.then(function(res){
-		    		console.log('这是添加',res);
+		    		
 		    	}.bind(this))
+		    	.catch(function(err){
+			        console.log(err);
+			    })
+		    	
 		    },
 		}
 	}

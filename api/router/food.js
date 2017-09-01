@@ -7,7 +7,7 @@ var urlencodeParser = bodyParser.urlencoded({
 
 exports.food = function(app){
 	//获取菜系
-	app.post('/getFoodStyle',urlencodeParser,function(request,response){
+	app.get('/getFoodStyle',urlencodeParser,function(request,response){
 		db.hmQuery('style',function(res){
 			if(res){
 				response.send({status:true, msg:'成功获取菜系信息', foodStyle:res});
@@ -15,6 +15,15 @@ exports.food = function(app){
 		})
 	});
 	
+	//添加分类
+	app.post('/addClassify',urlencodeParser,function(request,response){
+		console.log('request',request.body);
+		var data = request.body;
+		db.hmInsert('style',data,function(res){
+			response.send({status: true, msg: '添加菜系', addClassify: res});
+		})
+		
+	})
 	
 
 	//查询
@@ -24,7 +33,7 @@ exports.food = function(app){
 		var key = Object.keys(data).join(',');
         var val = Object.values(data).join('');
 
-		db.haiSearch('menu',val,function(res){
+		db.haiSearch('menu','style',val,function(res){
 
 			if(res){
 				response.send({status:true, msg: '成功获取菜单信息',munuStyle:res})
@@ -43,11 +52,13 @@ exports.food = function(app){
 	});
 
 	//编辑菜单
-	app.get('/editFood',function(request,response){
+	app.get('/editFood',urlencodeParser,function(request,response){
+		
 		var data = request.query;
 		console.log('这是data',data);
+		
 		db.hmUpdate('menu',data,function(res){
-			response.send({status:true,mag:'编辑菜品',addFood:res});
+			response.send({status:true,mag:'编辑菜品',editFood:res});
 		})
 	});
 
@@ -70,5 +81,8 @@ exports.food = function(app){
 			response.send({status:true, msg:'根据name模糊搜索', searchFood:res});
 		})
 	});
+
+	
+	
 	
 }

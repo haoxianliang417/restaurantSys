@@ -10,7 +10,9 @@ var bill = require('./bill.js')
 exports.main = function(express) {
 
 var app = express();
-app.use(express.static(path.join(path.resolve(__dirname, '../../'), '/')), function(req, res, next) {
+
+app.use(express.static(path.join(path.resolve(__dirname, '../../'), '/')), 
+    function(req, res, next) {
 
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -28,6 +30,7 @@ app.use(express.static(path.join(path.resolve(__dirname, '../../'), '/')), funct
     // Pass to next layer of middleware
     next();
 });
+
 
 
 
@@ -128,9 +131,19 @@ io.on('connection',function(socket){
 
 })
 haiDate.haiData(app);
+
 food.food(app);
+
 goodsData.goodsData(app)
 order.order(app)
+
+app.get('/', function(request, response) {
+
+    response.send('Home Page');
+})
+//app.listen(8888);
+
 bill.bill(app)
 server.listen(8888);
+
 }

@@ -55,6 +55,8 @@ body{
 		height:700px;
 		border-right:1px solid #D8D8D8;
 		background:#F0F0F0;
+		padding-top:30px;
+		padding-left:20px;
 		.plusClassfy{
 			padding:20px;
 			height:10%;
@@ -72,11 +74,21 @@ body{
 			.food_style{
 
 				li{
+					position: relative;
 					padding-left:9px;
 					height:40px;
 					line-height: 40px;
 					
 					margin:5px 0;
+					.editBox{
+						position: absolute;
+						
+						right: 5px;
+						top:2px;
+						span{
+							
+						}
+					}
 				}
 				li:hover{
 					background: #E8E8E8;

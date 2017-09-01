@@ -35,7 +35,7 @@ module.exports = {
         });
     },
 
-    //查询菜系
+    
     hmQuery: function(table,callback){
         connection.query('SELECT * FROM ' + table , function(err, result){
             if(err){
@@ -193,6 +193,9 @@ module.exports = {
         str = str.slice(0,-1);
         var  addSql = 'INSERT INTO' + ' ' + table + '(' + item + ') VALUES('+ str +')';
         connection.query(addSql, arr, function (err, result) {
+            if(err){
+                console.log(err)
+            }
             if(!err){
                 if(callback && typeof callback == 'function'){
                     callback(result);
